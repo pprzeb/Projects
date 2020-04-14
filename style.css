@@ -1,0 +1,17 @@
+body {
+    /* background-color: beige; */
+    text-align: center;
+    padding: 10px;
+    background-image: linear-gradient(to left,rgb(218, 199, 199), rgb(106, 168, 248));
+}
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aqua;
+}
+
+.box {
+    background-color: black;
+    padding: 2em;
+    /* margin: 2em; */
+}
