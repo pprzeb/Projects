@@ -5,6 +5,7 @@ import {show} from './repetitionmode.js';
 import {check} from './repetitionmode.js';
 import {clear2} from './repetitionmode.js';
 import {langNumber} from './creationmode.js';
+import {acc} from './repetitionmode.js';
 
 
 
@@ -39,6 +40,7 @@ function creationmode() {
     };
 
 function repetitionmode() {
+        acc.value = 1;
         elements.innerHTML='';
         box2.innerHTML='';
         box2.insertAdjacentHTML('afterbegin', `<p class="phrase" id='phrase2'>&nbsp</p>
@@ -64,6 +66,7 @@ creationmode();
 document.getElementById('creation').addEventListener("click", creationmode);
 document.getElementById('creation').addEventListener("click", showlist);
 document.getElementById('repetition').addEventListener("click", repetitionmode);
+// document.getElementById('repetition').addEventListener("click", );
 
 
 
