@@ -4,6 +4,7 @@ import {clear} from './creationmode.js';
 import {show} from './repetitionmode.js';
 import {check} from './repetitionmode.js';
 import {clear2} from './repetitionmode.js';
+import {langNumber} from './creationmode.js';
 
 
 
@@ -14,18 +15,24 @@ function creationmode() {
         box2.innerHTML = '';
         box2.insertAdjacentHTML('afterbegin', `
         <input id='myinput' class='myinput' type="text" size="50" placeholder="English sentence"/>
-        <input id='translateinput' class='myinput' type="text" size="50" placeholder="French translate"/>
+        <input id='translate1input' class='myinput' type="text" size="50" placeholder="French translation"/>
+        <input id='translate2input' class='myinput' type="text" size="50" placeholder="Romanian translation"/>
+        <input id='translate3input' class='myinput' type="text" size="50" placeholder="Polish translation"/>
+        <input id='translate4input' class='myinput' type="text" size="50" placeholder="Italian translation"/>
         <p class="phrase" id='phrase'>&nbsp</p>
         <p class="phraseCenter red" id='phraseVerify'>&nbsp</p>
         <button class='myButton' id="add">Add</button>`);
         document.getElementById('divlist').className = 'item';
-        document.getElementById('translateinput').addEventListener("keypress", function(e) {
+        document.getElementById('translate1input').addEventListener("keypress", function(e) {
             if (e.keyCode == 13) {createList(), showlist()}
         });
         document.getElementById('myinput').addEventListener("keypress", clear);
         
         document.getElementById('add').addEventListener("click", createList);
         document.getElementById('add').addEventListener("click", showlist);
+        
+        const x = document.getElementById('langnumb').value;
+        langNumber(x);
         
         
 
@@ -46,6 +53,7 @@ function repetitionmode() {
         });
         document.getElementById('check').addEventListener("click", check);
         document.getElementById('next').addEventListener("click", show);
+        document.getElementById('next').addEventListener("click", clear2);
         
 
 

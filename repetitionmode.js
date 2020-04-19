@@ -1,10 +1,20 @@
 let acc = 1;
 
+let keys = []; 
+ 
 export function show() {
+    keys = [];
+    for(let i=0; i<localStorage.length; i++) {
+        keys.push(localStorage.key(i));
+        keys.sort((a,b)=> a-b);
+        };
+    
     if (acc<=localStorage.length) {
-        let sentence = JSON.parse(localStorage[acc]).phrase;
+        let sentence = JSON.parse(localStorage[keys[acc-1]]).phrase;
         document.getElementById('phrase2').textContent = sentence;
         acc++;
+        console.log(acc);
+        console.log(keys);
         counter();
     }
 }
@@ -15,12 +25,12 @@ function counter() {
 
 export function  check() {
     let sentence = document.getElementById('myinput2').value;
-    if (sentence.toLocaleLowerCase() === JSON.parse(localStorage[acc-1]).translate.toLocaleLowerCase()) {
+    if (sentence.toLocaleLowerCase() === JSON.parse(localStorage[keys[acc-2]]).translate1.toLocaleLowerCase()) {
         document.getElementById('phraseVerify2').textContent = 'That\'s OK';
         document.getElementById('next').focus();
     } else {
         document.getElementById('phraseVerify2').textContent = `Wrong answer!`;
-        document.getElementById('answer').textContent = `${JSON.parse(localStorage[acc-1]).translate}`;
+        document.getElementById('answer').textContent = `${JSON.parse(localStorage[keys[acc-2]]).translate1}`;
         document.getElementById('myinput2').focus()};
 }
 

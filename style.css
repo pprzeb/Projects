@@ -164,3 +164,10 @@ h2 {
     color: #e60000; 
     
   }
+
+  .hide {
+      visibility: hidden;
+      display: block;
+      size: 0em;
+      font-size: 0em;
+  }
