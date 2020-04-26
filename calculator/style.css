@@ -1,0 +1,11 @@
+.container{
+    display: grid;
+    grid-template-columns: 2fr 5fr 2fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    height: 100 vm;
+    background-color: azure;
+}
+.main{
+    grid-area: 2/2/2/2;
+    background-color: cornflowerblue;
+}
