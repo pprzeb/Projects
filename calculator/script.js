@@ -1,83 +1,108 @@
+const buttonsDigits = document.querySelectorAll('.digit');
+const buttonsCalc = document.querySelectorAll('.calculation');
 const input = document.getElementById('input');
 const resultbox = document.getElementById('result');
 
+
+
 let a = '';
 let b = '';
-let operation = '';
-
-let firstValue = true;
+let ifFirstValue = true;
 let resultboxtext = [''];
 
-function update(x) {
-    resultbox.textContent = resultboxtext.join(' ');
-    // x ? resultboxtext = [' ']: resultboxtext = resultboxtext;
-    console.log(resultboxtext);
+
+for (button of buttonsDigits) {
+    button.addEventListener('click', getValue);
+}
+
+for (button of buttonsCalc) {
+    button.addEventListener('click', calculation);
 }
 
 function getValue() {
+    console.log(event.target.value)
     let value = event.target.value;
     if (Number(value)>=0 && Number(value) <=9) {
-        if (firstValue) {
+        if (ifFirstValue) {
             a = a + value;
             input.value = a;
         } else {
             b = b + value;
             input.value = b;
         }
-    } else {operation = value;
-    firstValue = false;
-    resultboxtext.push(a);
-    resultboxtext.push(operation);
-    update();}
+    } 
 }
-
-// function calcType() {
-//     calculationType = event.target.value;
-//     firstValue ? firstValue=false : firstValue=true;
-//     if (calculationType === 'addition') {
-//         resultboxtext.push(a);
-//         resultboxtext.push('+');
-//         update();
-//     } else if (calculationType === 'subtraction') {
-//         resultboxtext.push(a);
-//         resultboxtext.push('-');
-//         update();
-//     } else if (calculationType === 'multiplication') {
-//         resultboxtext.push(a);
-//         resultboxtext.push('*');
-//         update();
-//     } else if (calculationType === 'division') {
-//         resultboxtext.push(a);
-//         resultboxtext.push('/');
-//         update();
-//     }
-//     console.log(calculationType);
-//     console.log(firstValue)
-// }
+let operation = '';
+let result = '';
 
 function calculation() {
-    let result;
-    
-    if (operation === '+') {
-        result = Number(a) + Number(b);
-    } else if (operation === '-') {
-        result = Number(a) - Number(b);
-    } else if (operation === '*') {
-        result = Number(a) * Number(b);
-    } else if (operation === '/') {
-        result = Number(a) / Number(b);
-    } else if (operation === '%') {
-        b = b/100;
-        result = Number(a) * Number(b);
+    let value = event.target.value;
+    if (value !== '=') {
+        operation = value;
+         if (ifFirstValue) {
+            resultboxtext.push(a);
+            resultboxtext.push(operation); 
+            ifFirstValue = false;
+            input.value = '';   
+        } 
     }
 
-    input.value = result;
-    resultboxtext.push(b);
-    resultboxtext.push('=', result);
-    update();
-    a = result;
-    b = '';
-    operation = ''
+    
+       
+    if (value === '=') {
+        if (operation === '+') {
+            if (b !== '') {
+                result = Number(a) + Number(b);
+                resultboxtext.push(b);
+                resultboxtext.push('=', result);
+            } else {result = Number(a) + Number(a);
+                    resultboxtext.push(a);
+                    resultboxtext.push('=', result);
+                }
+        } else if (operation === '-') {
+            if (b !== '') {
+                result = Number(a) - Number(b);
+                resultboxtext.push(b);
+                resultboxtext.push('=', result);
+            } else {result = Number(a) - Number(a);
+                    resultboxtext.push(a);
+                    resultboxtext.push('=', result);
+                    }
+        } else if (operation === '*') {
+            if (b !== '') {
+                result = Number(a) * Number(b);
+                resultboxtext.push(b);
+                resultboxtext.push('=', result);
+            } else {result = Number(a) * Number(a);
+                resultboxtext.push(a);
+                resultboxtext.push('=', result);}
+        } else if (operation === '/') {
+            if (b !== '') {
+                result = Number(a) / Number(b);
+                resultboxtext.push(b);
+                resultboxtext.push('=', result);
+            } else {result = Number(a) / Number(a);
+                resultboxtext.push(a);
+                resultboxtext.push('=', result);}
+                    
+        } else if (operation === '%') {
+            let c = b/100;
+            result = Number(a) * Number(c);
+        }
+    } else {input.value = result}
+        
+
+    // input.value = result;
+    // resultboxtext.push(b);
+    // resultboxtext.push('=', result);
+    
+    updatetextBox();
+    
+}
+function updatetextBox() {
+    resultbox.textContent = resultboxtext.join(' ');
+    console.log(resultboxtext);
+    
 }
 
 function reset() {
