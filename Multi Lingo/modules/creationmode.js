@@ -1,9 +1,14 @@
 function addPhrasetoDB() {
-    let phrase = document.getElementById('myinput').value;
-    let translate1 = document.getElementById('translate1input').value;
-    let translate2 = document.getElementById('translate2input').value;
-    let translate3 = document.getElementById('translate3input').value;
-    let translate4 = document.getElementById('translate4input').value;
+    const word_en = document.getElementById('word_en').value;
+    const word_fr = document.getElementById('word_fr').value;
+    const word_it = document.getElementById('word_it').value;
+    const word_ro = document.getElementById('word_ro').value;
+    const word_pl = document.getElementById('word_pl').value;
+    const sentence_en = document.getElementById('sentence_en').value;
+    const sentence_fr = document.getElementById('sentence_fr').value;
+    const sentence_it = document.getElementById('sentence_it').value;
+    const sentence_ro = document.getElementById('sentence_ro').value;
+    const sentence_pl = document.getElementById('sentence_pl').value;
 
     let keys = []; 
     for(let i=0; i<localStorage.length; i++) {
@@ -20,11 +25,16 @@ function addPhrasetoDB() {
     
     const phrasedb = {
         id,
-        phrase,
-        translate1,
-        translate2,
-        translate3,
-        translate4,
+        word_en,
+        word_fr,
+        word_it,
+        word_ro,
+        word_pl,
+        sentence_en,
+        sentence_fr,
+        sentence_it,
+        sentence_ro,
+        sentence_pl,
         knowIndex: 1,
     };
         
@@ -34,14 +44,14 @@ function addPhrasetoDB() {
 
 export function createList() {
     addPhrasetoDB();
-    document.getElementById('phrase').textContent = document.getElementById('myinput').value || '\xa0';
-    document.getElementById('myinput').value = '';
-    document.getElementById('translate1input').value = '';
-    document.getElementById('translate2input').value = '';
-    document.getElementById('translate3input').value = '';
-    document.getElementById('translate4input').value = '';
+    document.getElementById('phrase').textContent = document.getElementById('sentence_en').value || '\xa0';
+    document.getElementById('sentence_en').value = '';
+    document.getElementById('sentence_fr').value = '';
+    document.getElementById('sentence_it').value = '';
+    document.getElementById('sentence_ro').value = '';
+    document.getElementById('sentence_pl').value = '';
     document.getElementById('phraseVerify').textContent = "Added to the database!";
-    document.getElementById('myinput').focus();
+    document.getElementById('sentence_en').focus();
     
     
 }
@@ -67,9 +77,9 @@ export function showlist() {
         let item = JSON.parse(localStorage[x]);
         
         elements.insertAdjacentHTML('beforeend', 
-        `<li class='li' id='${item.id}'><div class='nb'>${i+1}: </div>${item.phrase}
+        `<li class='li' id='${item.id}'><div class='nb'>${i+1}: ${item.word_en} || ${item.word_fr} || ${item.word_it} || ${item.word_ro} || ${item.word_pl}  </div>${item.sentence_en}
         <button class='deleteButton' id="${item.id}" onclick="document.getElementById('${item.id}').remove(); localStorage.removeItem(${item.id})" >Delete</button><br>
-        <span class='transl'>${item.translate1}</span></li>`);
+        <span class='transl'>${item.sentence_fr}</span></li>`);
         }
     }
     counter();
@@ -88,14 +98,14 @@ export function clear() {
 
 export function langNumber(x) {
     if (x==1) {
-        document.getElementById('translate2input').className="hide";
-        document.getElementById('translate3input').className="hide";
-        document.getElementById('translate4input').className="hide";
+        document.getElementById('sentence_pl').className="hide";
+        document.getElementById('sentence_it').className="hide";
+        document.getElementById('sentence_ro').className="hide";
     } else if (x==2) {
-        document.getElementById('translate3input').className="hide";
-        document.getElementById('translate4input').className="hide";
+        document.getElementById('sentence_ro').className="hide";
+        document.getElementById('sentence_pl').className="hide";
     } else if (x==3 ){
-        document.getElementById('translate4input').className="hide";
+        document.getElementById('sentence_pl').className="hide";
     }     
 }
 

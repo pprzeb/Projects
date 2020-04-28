@@ -9,7 +9,7 @@ export function show() {
         };
     
     if (acc.value<=localStorage.length) {
-        let sentence = JSON.parse(localStorage[keys[acc.value-1]]).phrase;
+        let sentence = JSON.parse(localStorage[keys[acc.value-1]]).sentence_en;
         document.getElementById('phrase2').textContent = sentence;
         acc.value++;
         console.log(acc);
@@ -24,12 +24,12 @@ function counter() {
 
 export function  check() {
     let sentence = document.getElementById('myinput2').value;
-    if (sentence.toLocaleLowerCase() === JSON.parse(localStorage[keys[acc.value-2]]).translate1.toLocaleLowerCase()) {
+    if (sentence.toLocaleLowerCase() === JSON.parse(localStorage[keys[acc.value-2]]).sentence_fr.toLocaleLowerCase()) {
         document.getElementById('phraseVerify2').textContent = 'That\'s OK';
         document.getElementById('next').focus();
     } else {
         document.getElementById('phraseVerify2').textContent = `Wrong answer!`;
-        document.getElementById('answer').textContent = `${JSON.parse(localStorage[keys[acc.value-2]]).translate1}`;
+        document.getElementById('answer').textContent = `${JSON.parse(localStorage[keys[acc.value-2]]).sentence_fr}`;
         document.getElementById('myinput2').focus()};
 }
 

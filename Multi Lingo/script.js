@@ -15,19 +15,24 @@ let box2 = document.getElementById('box2');
 function creationmode() {
         box2.innerHTML = '';
         box2.insertAdjacentHTML('afterbegin', `
-        <input id='myinput' class='myinput' type="text" size="50" placeholder="English sentence"/>
-        <input id='translate1input' class='myinput' type="text" size="50" placeholder="French translation"/>
-        <input id='translate2input' class='myinput' type="text" size="50" placeholder="Romanian translation"/>
-        <input id='translate3input' class='myinput' type="text" size="50" placeholder="Polish translation"/>
-        <input id='translate4input' class='myinput' type="text" size="50" placeholder="Italian translation"/>
+        <input id='word_en' class='myinput' type="text" size="9" placeholder="English"/>
+        <input id='word_fr' class='myinput' type="text" size="9" placeholder="French"/>
+        <input id='word_it' class='myinput' type="text" size="9" placeholder="Italian"/>
+        <input id='word_ro' class='myinput' type="text" size="9" placeholder="Romanian"/>
+        <input id='word_pl' class='myinput' type="text" size="9" placeholder="Polish"/>
+        <input id='sentence_en' class='myinput' type="text" size="40" placeholder="English"/>
+        <input id='sentence_fr' class='myinput' type="text" size="40" placeholder="French"/>
+        <input id='sentence_it' class='myinput' type="text" size="40" placeholder="Italian"/>
+        <input id='sentence_ro' class='myinput' type="text" size="40" placeholder="Romanian"/>
+        <input id='sentence_pl' class='myinput' type="text" size="40" placeholder="Polish"/>
         <p class="phrase" id='phrase'>&nbsp</p>
         <p class="phraseCenter red" id='phraseVerify'>&nbsp</p>
         <button class='myButton' id="add">Add</button>`);
         document.getElementById('divlist').className = 'item';
-        document.getElementById('translate1input').addEventListener("keypress", function(e) {
+        document.getElementById('sentence_fr').addEventListener("keypress", function(e) {
             if (e.keyCode == 13) {createList(), showlist()}
         });
-        document.getElementById('myinput').addEventListener("keypress", clear);
+        document.getElementById('word_en').addEventListener("keypress", clear);
         
         document.getElementById('add').addEventListener("click", createList);
         document.getElementById('add').addEventListener("click", showlist);
