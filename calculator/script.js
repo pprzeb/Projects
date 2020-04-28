@@ -3,7 +3,7 @@ const buttonsCalc = document.querySelectorAll('.calculation');
 const input = document.getElementById('input');
 const resultbox = document.getElementById('result');
 document.addEventListener('keydown', (e) => {if (['.','0','1','2','3','4','5','6','7','8','9'].includes(e.key)) {
-    getValue()} else if(['+','-','*','/','%','Enter','Delete'].includes(e.key)) {calculation()}})
+    getValue()} else if(['+','-','*','/','%','Enter','Delete', 'Backspace'].includes(e.key)) {calculation()}})
 
 
 
@@ -13,6 +13,7 @@ let isFirstValue = true;
 let resultboxtext = [''];
 let operation = '';
 let result = '';
+let lastPress = ''
 
 
 for (button of buttonsDigits) {
@@ -29,7 +30,8 @@ function getValue() {
         value = event.target.value;
         event.target.blur();
     } else value = event.key;
-    
+    lastPress = value;
+        
     if (Number(value)>=0 && Number(value) <=9 || value === '.') {
         if (isFirstValue) {
             if (value !== '.') {
@@ -68,98 +70,105 @@ function getValue() {
         }
     }
 }
-
+function calculate() {
+    if (a !== '' && b !== '' && operation !== '') {
+        if (operation === '+') {
+            result = Number(a) + Number(b);
+        } else if (operation === '-') {
+            result = Number(a) - Number(b);
+        } else if (operation === '*') {
+            result = Number(a) * Number(b);
+        } else if (operation === '/') {
+            result = Number(a) / Number(b);
+        } else if (operation === '%') {
+            let c = b/100;
+            result = Number(a) * Number(c);
+        }
+    }
+}
 
 
 function calculation() {
+    calculate();
     
     let value;
     if (event.type === 'click') {
-        value = event.target.value
+        value = event.target.value;
+        event.target.blur();
     } else value = event.key;
-        
+    
+
     if (['+','-','*','/','%'].includes(value)) {
-        operation = value;
-         if (isFirstValue) {
+        operation = value; 
+        if (['+','-','*','/','%'].includes(lastPress)) {
+            resultboxtext.pop();
+            resultboxtext.push(operation)
+            updatetextBox();
+            return
+        } 
+
+        if (isFirstValue) {
             resultboxtext.push(a);
             resultboxtext.push(operation); 
             isFirstValue = false;
             input.textContent = '';   
         } else {
             a = result;
-    
             if (resultboxtext[resultboxtext.length-2] === '=') {
                 resultboxtext.pop();
                 resultboxtext.pop();
+                resultboxtext.push(operation);
+            } else {
+                resultboxtext.push(b);
+                resultboxtext.push(operation);
             }
-            
-            console.log('a' + a, resultboxtext);
-            resultboxtext.push(operation);
-            resultboxtext.push(b);
-            
-            
+                   
             input.textContent = ''
             b = '';
-
-            // resultboxtext.slice()
         }
     }
   
     if (value === '=' || value ==='Enter') {
-        console.log('here', value)
-        if (operation === '+') {
-            if (b !== '') {
-                result = Number(a) + Number(b);
+        if (result !=='' && lastPress !== 'Enter' && lastPress !== '=') {
+            if (['+','-','*','/','%','Delete', 'Backspace'].includes(lastPress)) {
+                resultboxtext.pop();
+                resultboxtext.push('=', result);
+            } else {
                 resultboxtext.push(b);
                 resultboxtext.push('=', result);
-            } else {result = Number(a) + Number(a);
-                    resultboxtext.push(a);
-                    resultboxtext.push('=', result);
-                }
-        } else if (operation === '-') {
-            if (b !== '') {
-                result = Number(a) - Number(b);
-                resultboxtext.push(b);
-                resultboxtext.push('=', result);
-            } else {result = Number(a) - Number(a);
-                    resultboxtext.push(a);
-                    resultboxtext.push('=', result);
-                    }
-        } else if (operation === '*') {
-            if (b !== '') {
-                result = Number(a) * Number(b);
-                resultboxtext.push(b);
-                resultboxtext.push('=', result);
-            } else {result = Number(a) * Number(a);
-                resultboxtext.push(a);
-                resultboxtext.push('=', result);}
-        } else if (operation === '/') {
-            if (b !== '') {
-                result = Number(a) / Number(b);
-                resultboxtext.push(b);
-                resultboxtext.push('=', result);
-            } else {result = Number(a) / Number(a);
-                resultboxtext.push(a);
-                resultboxtext.push('=', result);}
-                    
-        } else if (operation === '%') {
-            let c = b/100;
-            result = Number(a) * Number(c);
-        }
-    };
+                input.textContent = ''
+            }
+            
+        } 
+        
+    }
 
-    if (value === 'ce' || value ==='Delete') {
+    if (value === 'c' || value ==='Delete') {
        return reset()
     }   
-  
+    
+    if (value === 'ce' || value ==='Backspace') {
+        return undo()
+    }
+
     updatetextBox();
+    lastPress = value;
     
 }
 
 function updatetextBox() {
     resultbox.textContent = resultboxtext.join(' ');
-    console.log(resultboxtext);
-    
+        
+}
+
+function undo() {
+    if (isFirstValue) {
+        a = a.substring(0, a.length-1);
+        input.textContent = a
+    } else {
+        b = b.substring(0, b.length-1);
+        input.textContent = b
+    }
     
 }
 
