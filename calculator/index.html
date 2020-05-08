@@ -7,40 +7,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello!</h1>
+   
     <div class="container">
-        <h2>Calculator</h2>
-        <div class="main">
-            content
+        <h1>Calculator</h1>     
+        <!-- <div class="main"> -->
             <div class='calcBox'>
-                <p class="result" id="result">&nbsp</p>
+                <p class="resultBox" id="result">&nbsp</p>
                 <p class="input" type="text" id="input"></p>
                 <button class="button hidden"></button>
+                <button class="button hidden"></button>
                 <button class="button calculation" id="reset" value="c">C</button>
+                <button class="button calculation" id="sqrt" value="sqrt">&#178&#8730x</button>
+                <button class="button calculation" id="pow" value="pow">x&#178</button>
+                <button class="button calculation" id="m" value="m">M</button>
+                <button class="button calculation" id="multiplication" value='*'>*</button>
                 <button class="button calculation" id="resetCE" value="ce">CE</button>
-                <button class="button digit" id="percent" value="%">%</button>
-                <button class="button calculation" id="plus" value='+'>+</button>
                 <button class="button digit" id="7" value="7">7</button>
                 <button class="button digit" id="8" value="8">8</button>
                 <button class="button digit" id="9" value="9">9</button>
-                <button class="button calculation" id="minus" value='-'>-</button>
+                <button class="button calculation" id="plus" value='+'>+</button>
+                <button class="button digit" id="percent" value="%">%</button> 
                 <button class="button digit" id="4" value="4">4</button>
                 <button class="button digit" id="5" value="5">5</button>
                 <button class="button digit" id="6" value="6">6</button>
-                <button class="button calculation" id="multiplication" value='*'>*</button>
+                <button class="button calculation" id="minus" value='-'>-</button>
+                <button class="button hidden"></button>
                 <button class="button digit" id="1" value="1">1</button>
                 <button class="button digit" id="2" value="2">2</button>
                 <button class="button digit" id="3" value="3">3</button>
                 <button class="button calculation" id="division" value='/'>/</button>
+                <button class="button hidden"></button>
                 <button class="button digit" id="plusminus" value="plusminus">+/-</button>
                 <button class="button digit" id="0" value="0">0</button>
                 <button class="button digit" id="comma" value=".">,</button>
-                
-                <!-- <button class="button hidden"></button> -->
+
                 <button class="button calculation" id="result" value='='>=</button>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
     <script src="script.js"></script>
 </body>
 </html>

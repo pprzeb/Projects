@@ -1,22 +1,61 @@
 .container{
     display: grid;
-    grid-template-columns: 2fr 5fr 2fr;
+    grid-template-columns: 2fr 4fr 2fr;
     grid-template-rows: 1fr 5fr 1fr;
+    grid-auto-flow: column  ;
     height: 100vh;
     background-color: azure;
 }
-.main{
-    
-    grid-area: 2/2/2/2;
-    background-color: cornflowerblue;
+h1{
+    grid-area: 1/2/2/3;
+    color: gray;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
+.calcBox{
+    grid-area: 2/2/2/2;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) ;
+    background-color: rgb(187, 233, 229);
+    padding: 20px;
+    column-gap: 5px;
+    row-gap: 5px;
+    border: solid;
+    border-color: indigo;
+    border-radius: 5px;
+}
+.resultBox{
+    text-align: center;
+    grid-area: 1/1/2/6;
+    font-family:Arial;
+    height: 1em;
+	font-size:20px;
+	font-weight:bold;
+}
+.input {
+    grid-area: 2/2/3/5;
+    border-radius:8px;
+	border:2px solid #29668f;
+    background-color: ivory;
+    margin: 10px;
+    cursor:pointer;
+	color:#061b5f;
+    font-family:Arial;
+    text-align: right;
+	font-size:20px;
+	font-weight:bold;
+    padding: 10px;
+    height: 20px;
+    	
+}
+
 .button {
     box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #29668f 5%, #599bb3 100%);
 	background-color:#599bb3;
 	border-radius:8px;
 	border:2px solid #29668f;
-    /* display:inline-block; */
     margin: 5px;
     cursor:pointer;
 	color:#ffffff;
@@ -39,39 +78,9 @@
 .hidden {
     visibility: hidden;
 }
-.result {
-    grid-area: 1/1/2/5;
-    font-family:Arial;
-    height: 1em;
-	font-size:20px;
-	font-weight:bold;
-}
 
-.input {
-    grid-area: 2/1/3/4;
-    border-radius:8px;
-	border:2px solid #29668f;
-    background-color: ivory;
-    margin: 5px;
-    cursor:pointer;
-	color:#061b5f;
-    font-family:Arial;
-    text-align: right;
-	font-size:20px;
-	font-weight:bold;
-    padding: 10px;
-    width: 210px;
-    height: 20px;
-	
-}
-.calcBox{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin: auto;
-    text-align: center;
-    background-color: whitesmoke;
-    width: 320px;
-}
+
+
 .calculation {
     background-color: tomato;
     background:linear-gradient(to bottom, #f13333 5%, #e66161 100%);

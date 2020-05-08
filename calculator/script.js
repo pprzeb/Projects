@@ -3,15 +3,16 @@ const buttonsCalc = document.querySelectorAll('.calculation');
 const input = document.getElementById('input');
 const resultbox = document.getElementById('result');
 document.addEventListener('keydown', (e) => {if (['.','0','1','2','3','4','5','6','7','8','9','%'].includes(e.key)) {
-    getValue()} else if(['+','-','*','/','Enter','Delete', 'Backspace'].includes(e.key)) {calculation()}})
+    getValue()} else if(['+','-','*','/','Enter','Delete', 'Backspace', 'sqrt', 'pow'].includes(e.key)) {calculation()}})
 
 
 
 let a = '';
 let b = '';
+
 let isFirstValue = true;
 let resultboxtext = [''];
-let operation = '';
+let currentOperation = '';
 let result = '';
 let lastPress = ''
 
@@ -80,30 +81,40 @@ function getValue() {
             }
         }
     } else if (value === '%') {
-        if (operation === '+' || operation === '-') {
+        if (currentOperation === '+' || currentOperation === '-') {
             b = Number(a) * b/100;
             input.textContent = b;
-        } else if (operation === '*' || operation === '/') {
+        } else if (currentOperation === '*' || currentOperation === '/') {
             b = b/100;
             input.textContent = b;
         } else {
             a = 0;
             input.textContent = 0}
     }
+    
 }
 
 
 function calculate() {
-    if (a !== '' && b !== '' && operation !== '') {
-        if (operation === '+') {
+    if (a !== '' && b !== '' && currentOperation !== '') {
+        if (currentOperation === '+') {
             result = Number(a) + Number(b);
-        } else if (operation === '-') {
+        } else if (currentOperation === '-') {
             result = Number(a) - Number(b);
-        } else if (operation === '*') {
+        } else if (currentOperation === '*') {
             result = Number(a) * Number(b);
-        } else if (operation === '/') {
+        } else if (currentOperation === '/') {
             result = Number(a) / Number(b);
         } 
+    } else if (a !== '' && b === '') {
+        if (event.target.value === 'sqrt') {
+            result = Math.sqrt(a);
+            console.log(result)
+        } else if (event.target.value = 'pow') {
+            result = Math.pow(a, 2)
+            console.log(result)
+        }
+    
     }
 }
 
@@ -119,10 +130,10 @@ function calculation() {
     
 
     if (['+','-','*','/'].includes(value)) {
-        operation = value; 
+        currentOperation = value; 
         if (['+','-','*','/'].includes(lastPress)) {
             resultboxtext.pop();
-            resultboxtext.push(operation)
+            resultboxtext.push(currentOperation)
             updatetextBox();
             return
         } 
@@ -130,7 +141,7 @@ function calculation() {
         if (isFirstValue) {
             a?a: a=0;
             resultboxtext.push(a);
-            resultboxtext.push(operation); 
+            resultboxtext.push(currentOperation); 
             isFirstValue = false;
             input.textContent = '';   
         } else {
@@ -138,10 +149,10 @@ function calculation() {
             if (resultboxtext[resultboxtext.length-2] === '=') {
                 resultboxtext.pop();
                 resultboxtext.pop();
-                resultboxtext.push(operation);
+                resultboxtext.push(currentOperation);
             } else {
                 resultboxtext.push(b);
-                resultboxtext.push(operation);
+                resultboxtext.push(currentOperation);
             }
                    
             input.textContent = ''
@@ -198,7 +209,7 @@ function reset() {
     b = '';
     isFirstValue = true;
     resultboxtext = [''];
-    operation = '';
+    currentOperation = '';
     result = '';
     input.textContent = ''
     event.target.blur()
