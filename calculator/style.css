@@ -27,7 +27,15 @@ h1{
 }
 .resultBox{
     text-align: center;
-    grid-area: 1/1/2/6;
+    grid-area: 1/1/2/4;
+    font-family:Arial;
+    height: 1em;
+	font-size:20px;
+	font-weight:bold;
+}
+.totalBox{
+    text-align: center;
+    grid-area: 1/4/2/6;
     font-family:Arial;
     height: 1em;
 	font-size:20px;
