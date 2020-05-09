@@ -33,7 +33,12 @@ h2 {
     justify-content: center;
     grid-template-columns: 20vw 50vw 20vw;
     gap: 20px;
-    
+}
+
+.box2 {
+    display: grid;
+    grid-template-columns: repeat(20%, 5);
+    background-color: lawngreen;
     
 }
 .item {
@@ -128,7 +133,7 @@ h2 {
     display: inline-block;
     box-sizing: content-box;
     padding: 8px 10px;
-    margin: 2px;
+    margin: 2px; 
     border: 1px solid #b7b7b7;
     border-radius: 3px;
     font: normal 16px/normal "Lucida Console", Monaco, monospace;
