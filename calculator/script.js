@@ -3,6 +3,8 @@ const buttonsCalc = document.querySelectorAll('.calculation');
 const input = document.getElementById('input');
 const resultbox = document.getElementById('result');
 const totalbox = document.getElementById('total');
+const operationslist = document.getElementById('operationlist');
+const clearButton = document.getElementById('clear')
 document.addEventListener('keydown', (e) => {if (['.','0','1','2','3','4','5','6','7','8','9'].includes(e.key)) {
     showInput()} else if(['+','-','*','/','%','Enter','Delete', 'Backspace', 'sqrt', 'pow'].includes(e.key)) {calculate()}})
 
@@ -15,6 +17,7 @@ for (button of buttonsCalc) {
         button.addEventListener('click', calculate);
     }
 
+clearButton.addEventListener('click', clearList);
 
 let isFirstTouch = true;
 let isFirstCalculateTouch = true;
@@ -27,6 +30,8 @@ function showInput() {
         input.innerHTML = '';
         isFirstTouch = false;
     } 
+
+    if (!isFirstEnter && resultbox.textContent.charAt(resultbox.textContent.length-1) === '=') {reset('')};
     
     if (event.type === 'click') {
         input.textContent !== '.' ?
@@ -49,7 +54,7 @@ function calculate() {
         calculationNext = event.target.value
     } else calculationNext = event.key;
     if (calculationNext === 'Delete') {
-        reset();
+        reset(0);
     } else {
         getElements(calculationNext)
     }
@@ -86,18 +91,19 @@ function getElements(calcNext) {
     } else if (calcNext === 'pow') {
         if (isFirstCalculateTouch) {
             let power = inputValue*inputValue;               
-            resultbox.textContent = `${resultbox.textContent} ${power}  `
+            resultbox.textContent = `${resultbox.textContent} ${power}(${inputValue}${String.fromCharCode(178)})  `
             input.innerHTML = power;
-            makeSimpleCalculation(Number(power), calculationType)
+            makeSimpleCalculation(Number(power), calculationType);
+            showList(inputValue,'pw',0,power)
             isFirstCalculateTouch = false;
         }
     } else if (calcNext === 'sqrt') {
         if (isFirstCalculateTouch) {
             let sqrt = Math.sqrt(inputValue);
-            
-            resultbox.textContent = `${resultbox.textContent} ${sqrt}(${String.fromCharCode(8730)}${inputValue})  `
+            resultbox.textContent = `${resultbox.textContent} ${sqrt}(${String.fromCharCode(8730)}${inputValue})  `;
             input.innerHTML = sqrt;
             makeSimpleCalculation(Number(sqrt), calculationType)
+            showList(inputValue,'sq',0,sqrt)
             isFirstCalculateTouch = false;
         }
     } else if (calcNext === 'Enter') {
@@ -118,30 +124,42 @@ function getElements(calcNext) {
 
 function makeSimpleCalculation(firstValue, x) {
     let secondValue = totalValue;
-    
     if (totalValue !== '') {
-  
-        if (x === '+') {
+          if (x === '+') {
             totalValue = firstValue + secondValue
+            showList(secondValue,x ,firstValue, totalValue)
         }   
-        
         if (x === '-') {
             totalValue = secondValue - firstValue
+            showList(secondValue,x ,firstValue, totalValue)
         } 
-
         if (x === '*') {
             totalValue = secondValue * firstValue
+            showList(secondValue,x ,firstValue, totalValue)
         } 
-
         if (x === '/') {
             totalValue = secondValue / firstValue
+            showList(secondValue,x ,firstValue, totalValue)
         } 
 
         totalbox.textContent = totalValue
     } else {totalValue = firstValue;}
 }
 
-function reset() {
+function showList(x, i, y, z) {
+    let node = document.createElement('LI');
+    let operation;
+    if (i === 'sq') {
+        operation = document.createTextNode(`${String.fromCharCode(8730)}${x} = ${z}`)
+    } else if (i === 'pw') {
+        operation = document.createTextNode(`${x}${String.fromCharCode(178)} = ${z}`)
+    } else {operation = document.createTextNode(`${x} ${i} ${y} = ${z}`);}
+    
+    node.appendChild(operation)
+    operationslist.appendChild(node)
+}
+
+function reset(x) {
     isFirstTouch = true;
     isFirstCalculateTouch = true;
     isFirstEnter = true;
@@ -149,8 +167,12 @@ function reset() {
     totalValue = ''
     resultbox.textContent = '';
     totalbox.textContent = '';
-    input.innerHTML = 0;
+    input.innerHTML = x;
     isStart = false;
+}
+
+function clearList() {
+   operationslist.innerHTML = 'Operation\'s list'
 }
 
 
