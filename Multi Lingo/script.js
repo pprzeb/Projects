@@ -1,21 +1,30 @@
-import {createList} from './modules/creationmode.js';
-import {showlist} from './modules/creationmode.js';
-import {clear} from './modules/creationmode.js';
-import {langNumber} from './modules/creationmode.js';
-import {show} from './modules/repetitionmode.js';
-import {check} from './modules/repetitionmode.js';
-import {clear2} from './modules/repetitionmode.js';
-import {acc} from './modules/repetitionmode.js';
+import {displayInputs} from './modules/creationmode.js';
+import {showList} from './modules/creationmode.js';
+
+// import {} from './modules/creationmode.js';
+// import {} from './modules/repetitionmode.js';
+// import {} from './modules/repetitionmode.js';
+// import {} from './modules/repetitionmode.js';
+// import {} from './modules/repetitionmode.js';
+
+const creationBtn = document.getElementById('creation');
+const repetitionBtn = document.getElementById('repetition');
+
+const clearBtn = document.getElementById('clearDB');
+const submitbtn = document.getElementById('submitbtn');
+
+const clearDb = () => localStorage.clear();
+creationBtn.addEventListener('click', creationmode);
+repetitionBtn.addEventListener('click', repetitionmode);
+
+clearBtn.addEventListener('click', clearDb);
+submitbtn.addEventListener('click', displayInputs);
+
+function creationmode() {}
+
+function repetitionmode() {}
 
 
-
-
-
-
-function creationmode() {
-       
-
-function repetitionmode() {
        
 
 

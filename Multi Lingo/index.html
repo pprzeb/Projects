@@ -8,35 +8,64 @@
     
 </head>
 <body>
-    <h1>Multi Lingo</h1>
-    
     <div class='container'>
-        <div class='item' id='box1'>
-            <select class='myinput' id='langnumb'>
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-            </select> 
+        <h1>Multi Lingo</h1>
+        <div class='box1' id='box1'>
+            <div class="langList">
+                <label class='checkbox-label'>
+                    <input class='checkbox' type='checkbox' id='English'>English
+                </label><br>
+                
+                <label class='checkbox-label'>
+                    <input class='checkbox' type='checkbox' id='French'>French
+                </label><br>
+
+                <label class='checkbox-label'>
+                    <input class='checkbox' type='checkbox' id='Romanian'>Romanian
+                </label><br>
+
+                <label class='checkbox-label'>
+                    <input class='checkbox' type='checkbox' id='Italian'>Italian
+                </label><br>
+
+                <label class='checkbox-label'>
+                    <input class='checkbox' type='checkbox' id='Spanish'>Spanish
+                </label><br>
+
+                <input type="submit" id='submitbtn' value="Submit">
+                <!-- <input class='checkbox' type='checkbox' id='lang_fr' value='lang_fr'>
+                <label for="lang_fr"> French</label><br>
+                <input class='checkbox' type='checkbox' id='lang_ro' value='lang_ro'>
+                <label for="lang_ro"> Romanian</label><br>
+                <input class='checkbox' type='checkbox' id='lang_it' value='lang_it'>
+                <label for="lang_it"> Italian</label><br>
+                <input class='checkbox' type='checkbox' id='lang_sp' value='lang_sp'>
+                <label for="lang_sp"> Spanish</label><br> -->
+
+                </div>
+            
+                
             <button class='myButton' id="creation">Creation</button>
             <button class='myButton' id="repetition">Repetition</button>
-        </div>
-        <div class='item' id='box2'></div>
-
-        <div class='item' id='box3'>
-            <h2>Number of sentences:<div id='counter'>0</div></h2>
+            <button class='myButton' id="clearDB">ClearDB</button>
             
+        </div>
+        <div class='box2' id='box2'>
+            
+        </div>
+
+        <div class='box3' id='box3'>
+            <h2>Number of sentences:<div id='counter'>0</div></h2>
         </div>
 
         <div></div>
 
-        <div id='divlist' class='item'> 
-            <ul id='elements'></ul>         
+        <div class='box4' id='box4' > 
+       
         </div>
     </div>
     
     <script type="module" src="script.js"></script>
-    
-    
+
 </body>
 </html>

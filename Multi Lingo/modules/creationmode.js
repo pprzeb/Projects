@@ -1,120 +1,108 @@
-function addPhrasetoDB() {
-    const word_en = document.getElementById('word_en').value;
-    const word_fr = document.getElementById('word_fr').value;
-    const word_it = document.getElementById('word_it').value;
-    const word_ro = document.getElementById('word_ro').value;
-    const word_pl = document.getElementById('word_pl').value;
-    const sentence_en = document.getElementById('sentence_en').value;
-    const sentence_fr = document.getElementById('sentence_fr').value;
-    const sentence_it = document.getElementById('sentence_it').value;
-    const sentence_ro = document.getElementById('sentence_ro').value;
-    const sentence_pl = document.getElementById('sentence_pl').value;
+const box2 = document.getElementById('box2');
+const box4 = document.getElementById('box4');
 
-    let keys = []; 
-    for(let i=0; i<localStorage.length; i++) {
-        keys.push(localStorage.key(i));
-        keys.sort((a,b)=> a-b);
-        }
-        
-    let id = 1;
-    for(let x of keys) {
-        if (x == id) {
-            id++
-        }
+
+//this function check which languages are chosen
+function activeLang() {
+    let langArray = [];
+    let checkedLang = document.querySelectorAll('.checkbox')
+    for (let x of checkedLang) {
+    if (document.getElementById(x.id).checked) langArray.push(document.getElementById(x.id).id);
     }
-    
-    const phrasedb = {
-        id,
-        word_en,
-        word_fr,
-        word_it,
-        word_ro,
-        word_pl,
-        sentence_en,
-        sentence_fr,
-        sentence_it,
-        sentence_ro,
-        sentence_pl,
-        knowIndex: 1,
+    return langArray
+}
+//this function display inputs for chosen languages
+export function displayInputs() {
+    const langArray = activeLang();
+    document.getElementById('box2').style.gridTemplateColumns = `repeat(${langArray.length}, 18%)`
+    document.getElementById('box4').style.gridTemplateColumns = `5% repeat(${langArray.length}, 15%) 8%`
+    box2.innerHTML = '';
+    for (let i=0; i<langArray.length; i++) {
+        createInputCard(langArray[i])
     };
-        
-    localStorage.setItem(id,JSON.stringify(phrasedb));
-    
-};
+    box2.insertAdjacentHTML('beforeend',`<button class='myButton' id="addtoDbBtn">Add</button>`)
+    const addtoDbBtn = document.getElementById('addtoDbBtn');
+    addtoDbBtn.style.gridArea = '2/2/3/4'
+    addtoDbBtn.addEventListener('click', addItemToDb);
+    showList();
 
-export function createList() {
-    addPhrasetoDB();
-    document.getElementById('phrase').textContent = document.getElementById('sentence_en').value || '\xa0';
-    document.getElementById('sentence_en').value = '';
-    document.getElementById('sentence_fr').value = '';
-    document.getElementById('sentence_it').value = '';
-    document.getElementById('sentence_ro').value = '';
-    document.getElementById('sentence_pl').value = '';
-    document.getElementById('phraseVerify').textContent = "Added to the database!";
-    document.getElementById('sentence_en').focus();
+}
+//display inputs for checked languages
+function createInputCard(langName) {
+    let langIdHTML = langName.substring(0,2);
+    box2.insertAdjacentHTML('beforeend',`<div class="card"><h2>${langName}</h2><input class='langInput' type="text" id=${langIdHTML}></input></div>`)
+}
+//this function display a list of words(only for checked languages) from localStorage
+export function showList() {
+    const langArray = activeLang();
+    box4.innerHTML = '';
+    for(let x of langArray) {
+        box4.insertAdjacentHTML('beforeend',`<p>${x}</p>`)    
+    }
+    box4.insertAdjacentHTML('afterbegin',`<p>ID</p>`)
+    box4.insertAdjacentHTML('beforeend',`<p></p>`)
+    let keys = [];
+    for (let i=0; i<localStorage.length; i++) {
+        keys.push(localStorage.key(i));
+        keys.sort((a, b) => a - b);
+    }
+
+    let langId = [];
+    let langIdfromHTML = document.querySelectorAll('.langInput')
+    for (let x of langIdfromHTML) {
+        langId.push(document.getElementById(x.id).id);
+    }
     
+    let nr = 1;
+    for(let x of keys) {
+        let item = JSON.parse(localStorage[x]);
+        box4.insertAdjacentHTML('beforeend',`<p>${nr}</p>`)
+        nr++;
+        for (let y of langId) {
+            let z;
+            item[y]?z = item[y]: z = '';
+            box4.insertAdjacentHTML('beforeend',`<p class=${x} contenteditable="false">${z}</p>`)
+        }
+        box4.insertAdjacentHTML('beforeend', `<button class='deleteBtn' id='${x}'>Delete</button>`)
+    }
+    document.querySelectorAll('.deleteBtn').forEach(item => item.addEventListener('click', deleteItem))
     
 }
 
-export function showlist() {
-    document.getElementById('elements').remove();
-    let list = document.createElement("ul");
-    list.id='elements';
-    document.getElementById('divlist').append(list);
+// add new word to localStorage and display actual list of words
+export function addItemToDb() {
+    let keys = [];
+    for (let i=0; i<localStorage.length; i++) {
+        keys.push(localStorage.key(i));
+        keys.sort((a, b) => a - b);
+    }
     
-    let elements = document.getElementById('elements');
+    let id = keys[keys.length-1];
+    id++
     
-    let keys = []; 
-    
-    for(let k=0; k<localStorage.length; k++) {
-        keys.push(localStorage.key(k));
-        keys.sort((a,b)=> a-b);
-        };
+    const item = {id}
 
-    for(let i=0; i<localStorage.length; i++) {
-        if (localStorage.length>0) {
-        let x = keys[i];
-        let item = JSON.parse(localStorage[x]);
-        
-        elements.insertAdjacentHTML('beforeend', 
-        `<li class='li' id='${item.id}'><div class='nb'>${i+1}: ${item.word_en} || ${item.word_fr} || ${item.word_it} || ${item.word_ro} || ${item.word_pl}  </div>${item.sentence_en}
-        <button class='deleteButton' id="${item.id}" onclick="document.getElementById('${item.id}').remove(); localStorage.removeItem(${item.id})" >Delete</button><br>
-        <span class='transl'>${item.sentence_fr}</span></li>`);
+    let langIdfromHTML = document.querySelectorAll('.langInput')
+    for (let x of langIdfromHTML) {
+        item[x.id] = document.getElementById(x.id).value
+    }
+    
+    localStorage.setItem(id, JSON.stringify(item))
+    
+    function clearInput () {
+        for (let x of langIdfromHTML) {
+        document.getElementById(x.id).value = ''
         }
     }
-    counter();
-    
-};
+    clearInput();
+    showList();
+    langIdfromHTML[0].focus()
 
-function counter() {
-    document.getElementById('counter').textContent = localStorage.length;
-};
-
-export function clear() {
-    phrase.textContent = '\xa0';
-    phraseVerify.textContent = '\xa0';
-}; 
-
-
-export function langNumber(x) {
-    if (x==1) {
-        document.getElementById('sentence_pl').className="hide";
-        document.getElementById('sentence_it').className="hide";
-        document.getElementById('sentence_ro').className="hide";
-    } else if (x==2) {
-        document.getElementById('sentence_ro').className="hide";
-        document.getElementById('sentence_pl').className="hide";
-    } else if (x==3 ){
-        document.getElementById('sentence_pl').className="hide";
-    }     
 }
 
-
-
-
-
-
-
-
-
+function deleteItem () {
+    localStorage.removeItem(event.target.id);
+    showList()
+    
+}
 
