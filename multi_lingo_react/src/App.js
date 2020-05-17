@@ -1,14 +1,30 @@
 import React from 'react';
 import './App.css';
 import MainBox from './mainbox'
+import checkboxes from './checkboxes';
+import Checkbox from './Checkbox';
+// import InputCard from './inputCard';
 
-function handleChange(e){
-  console.log(e.target.value)
-}
 
-function App() {
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      checkedItems: new Map(),
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  handleChange(e) {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    this.setState(prevState => ({checkedItems: prevState.checkedItems.set(item, isChecked)}))
+  }
+  
+render () {
+  
   return (
-    <div className="App">
+    <div key='app' className="App">
       <nav className="tl pa3 pa4-ns">
         <a className="link dim black b f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Site Name</a>
         <a className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Home</a>
@@ -22,36 +38,21 @@ function App() {
         <div className="cf ph2-ns">
           <div className="fl w-100 w-20-ns pa2">
             <div className="outline bg-white pv2">
-              <form className="pa2" onChange={handleChange}>
-              <fieldset id="favorite_movies" className="bn">
-              <legend className="fw7 mb2">My languages</legend>
-              <div className="flex items-center mb2">
-                  <input className="mr2" type="checkbox" id="english_chbox" value="english"/>
-                  <label htmlFor="english" className="lh-copy">English</label>
-              </div>
-              <div className="flex items-center mb2">
-                  <input className="mr2" type="checkbox" id="french_chbox" value="french"/>
-                  <label htmlFor="french" className="lh-copy">French</label>
-              </div>
-              <div className="flex items-center mb2">
-                  <input className="mr2" type="checkbox" id="romanian_chbox" value="romanian"/>
-                  <label htmlFor="romanian" className="lh-copy">Romanian</label>
-              </div>
-              <div className="flex items-center mb2">
-                  <input className="mr2" type="checkbox" id="spanish_chbox" value="spanish"/>
-                  <label htmlFor="spanish" className="lh-copy">Spanish</label>
-              </div><div className="flex items-center mb2">
-                  <input className="mr2" type="checkbox" id="italian_chbox" value="italian"/>
-                  <label htmlFor="italian" className="lh-copy">Italian</label>
-              </div>
-              </fieldset>
-              </form>
+            <div className="pa3">
+            <legend className="fw7 mb2">My languages</legend>
+              {
+                checkboxes.map(item => (
+                <Checkbox key={item.name} name={item.name} checked={this.state.checkedItems.get(item.name)} onChange={this.handleChange} />
+              ))
+              }
+            </div>
             </div>
           </div>
           <div className="fl w-100 w-70-ns pa2">
-            <div className="outline bg-washed-blue pv3">
-            <MainBox />
-
+            <div key='main' className="outline bg-washed-blue pv3">
+            
+                <MainBox lang={this.state.checkedItems}/>
+            
             </div>
             
           </div>
@@ -63,6 +64,7 @@ function App() {
       
     </div>
   );
+}
 }
 
 export default App;
