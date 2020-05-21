@@ -10,7 +10,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      checkedItems: new Map(),
+      checkedItems: new Map([
+        ['english', true],
+        ['french', true],
+        ['romanian', true],
+        ['italian', true],
+        ['spanish', true],
+      ]),
     }
     this.handleChange = this.handleChange.bind(this);
   }
