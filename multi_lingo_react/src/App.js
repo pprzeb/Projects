@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
-import MainBox from './mainbox'
-import checkboxes from './checkboxes';
-import Checkbox from './Checkbox';
-// import InputCard from './inputCard';
+import './css/App.css';
+import CreationMode from './CreationMode/creationMode'
+import checkboxes from './LanguagesList/checkboxes';
+import Checkbox from './LanguagesList/Checkbox';
+import RepetitionMode from './RepetitionMode/repetitionMode'
 
 
 class App extends React.Component {
@@ -30,13 +30,13 @@ class App extends React.Component {
 render () {
   
   return (
-    <div key='app' className="App">
+    <div key='appls' className="tc">
       <nav className="tl pa3 pa4-ns">
-        <a className="link dim black b f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Site Name</a>
-        <a className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Home</a>
-        <a className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="About">About</a>
-        <a className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Store">Store</a>
-        <a className="link dim gray    f6 f5-ns dib" href="http://localhost:3000/" title="Contact">Contact</a>
+        <a key='appls1' className="link dim black b f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Site Name</a>
+        <a key='appls2' className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Home</a>
+        <a key='appls3' className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="About">About</a>
+        <a key='appls4' className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Store">Store</a>
+        <a key='appls5' className="link dim gray    f6 f5-ns dib" href="http://localhost:3000/" title="Contact">Contact</a>
       </nav>
       <header className='f3 white bg-blue ma1 dib br3 pa3 shadow-5'>Welcome to Multi Lingo App</header>
       <header className='f3 white bg-blue ma1 dib br3 pa3 shadow-5'>Creation mode</header>
@@ -54,10 +54,11 @@ render () {
             </div>
             </div>
           </div>
-          <div className="fl w-100 w-70-ns pa2">
+          <div className="tc fl w-100 w-70-ns pa2">
             <div key='main' className="outline bg-washed-blue pv3">
             
-                <MainBox lang={this.state.checkedItems}/>
+                {/* <CreationMode lang={this.state.checkedItems}/> */}
+                <RepetitionMode lang={this.state.checkedItems}/>
             
             </div>
             
