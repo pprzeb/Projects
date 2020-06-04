@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Checkbox = ({ type = 'checkbox', name, checked = false, onChange }) => (
-    <div className="flex items-center mb2">
-    <input className="mr2" type={type} name={name} checked={checked} onChange={onChange}/>
-    <label className="lh-copy">{name}</label>
+const Checkbox = ({ className, disabled, name, checked = false, onChange, onChangeMainLang }) => (
+    <div className={className}>
+    <input className="ml2 mr2" type='checkbox' disabled={disabled} name={name} checked={checked} onChange={onChange}/>
+    <button className="pv2 ph3 br3 bg-transparent ba b--transparent hover-bg-light-blue hover-dark-blue" onClick={onChangeMainLang} name={name}>{name}</button>
     </div>
-    
+
   );
 
 export default Checkbox;
