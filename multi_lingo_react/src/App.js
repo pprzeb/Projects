@@ -1,4 +1,8 @@
 import React from 'react';
+
+
+import HomePage from './pages/homePage/homePage'
+
 import './css/App.css';
 import CreationMode from './CreationMode/creationMode'
 import checkboxes from './LanguagesList/checkboxes';
@@ -46,6 +50,7 @@ render () {
   
   return (
     <div key='appls' className="tc">
+      <HomePage />
       <nav className="tl pa3 pa4-ns">
         <a key='appls1' className="link dim black b f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Site Name</a>
         <a key='appls2' className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Home</a>
