@@ -20,7 +20,6 @@ class HomePage extends React.Component {
         <div>
             <h1>Welcome to Multi Lingo Universe</h1>
             <h2>the best place where you can learn languages</h2>
-
             <MenuInitial 
                 onClick={this.props.handleLanguagesChange} 
                 buttonStyle={this.props.checkedLanguages} 
