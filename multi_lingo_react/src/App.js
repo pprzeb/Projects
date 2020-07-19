@@ -11,29 +11,36 @@ import RepetitionMode from './RepetitionMode/repetitionMode'
 
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       checkedItems: new Map([
-        ['english', true],
-        ['french', true],
-        ['romanian', true],
-        ['italian', true],
-        ['spanish', true],
+        ['english', [false, 'menu-item eng']],
+        ['french', [false, 'menu-item fre']],
+        ['romanian', [false, 'menu-item rom']],
+        ['italian', [false, 'menu-item ita']],
+        ['spanish', [false, 'menu-item spa']],
       ]),
       mainLang: 'english',
-      operationMode: 'creationMode'
+      operationMode: 'creationMode',
     }
-    this.handleChange = this.handleChange.bind(this);
+    
     this.onChangeMainLang = this.onChangeMainLang.bind(this);
     this.handleMode = this.handleMode.bind(this);
+    this.handleLanguagesChange = this.handleLanguagesChange.bind(this)
   }
   
-  handleChange(e) {
+  
+  // new code
+  handleLanguagesChange(e) {
     const item = e.target.name;
-    const isChecked = e.target.checked;
-    this.setState(prevState => ({checkedItems: prevState.checkedItems.set(item, isChecked)}));
-    if (item===this.state.mainLang && isChecked===false) {this.setState({mainLang: ''})}
+    let abr = item.substring(0,3)
+    const isChecked = !this.state.checkedItems.get(item)[0];
+    let buttonStyle;
+    if (isChecked) {buttonStyle = `menu-item ${abr} active`} else {buttonStyle = `menu-item ${abr}`} ;
+    const setButtonStyle = [isChecked, buttonStyle]
+    this.setState(prevState => ({checkedItems: prevState.checkedItems.set(item, setButtonStyle)}));
+    console.log(this.state.checkedItems)
   }
 
   onChangeMainLang(e) {
@@ -47,10 +54,10 @@ class App extends React.Component {
   }
   
 render () {
-  
+  const languages = ['spanish', 'romanian', 'italian', 'french', 'english'] 
   return (
     <div key='appls' className="tc">
-      <HomePage />
+      <HomePage lang ={languages} checkedLanguages = {this.state.checkedItems} handleLanguagesChange={this.handleLanguagesChange}/>
       <nav className="tl pa3 pa4-ns">
         <a key='appls1' className="link dim black b f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Site Name</a>
         <a key='appls2' className="link dim gray    f6 f5-ns dib mr3" href="http://localhost:3000/" title="Home">Home</a>
@@ -74,8 +81,8 @@ render () {
                   key={this.state.mainLang} 
                   name={this.state.mainLang}
                   className="flex items-center mb2 bg-light-blue br3"
-                  checked={this.state.checkedItems.get(this.state.mainLang)} 
-                  onChange={this.handleChange} 
+                  checked={this.state.checkedItems.get(this.state.mainLang)[0]} 
+                  onChange={this.handleLanguagesChange} 
                   onChangeMainLang={this.onChangeMainLang}
                   button={false} 
                   disabled={true}
@@ -87,8 +94,8 @@ render () {
                   key={item.name} 
                   name={item.name}
                   className="flex items-center mb2" 
-                  checked={this.state.checkedItems.get(item.name)} 
-                  onChange={this.handleChange} 
+                  checked={this.state.checkedItems.get(item.name)[0]} 
+                  onChange={this.handleLanguagesChange} 
                   onChangeMainLang={this.onChangeMainLang}
                   button={true} />
               ))

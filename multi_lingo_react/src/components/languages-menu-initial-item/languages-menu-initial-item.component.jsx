@@ -4,10 +4,12 @@ import './languages-menu-initial-item.component.scss';
 
 
 const MenuItem = (props) => {
+    
     return (
         <div className='menuitem'>
+            
             <p>
-                English
+                {props.langName}
             </p>
         </div>
     )
