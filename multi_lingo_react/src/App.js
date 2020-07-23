@@ -5,6 +5,7 @@ import Header from './components/header/header.component'
 import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up'
 import HomePage from './pages/homePage/homePage'
 
+import { createUserProfile, auth } from '../src/firebase/firebase.utils'
 
 import './css/App.css';
 import CreationMode from './CreationMode/creationMode'
@@ -26,6 +27,7 @@ class App extends React.Component {
       ]),
       mainLang: 'english',
       operationMode: 'creationMode',
+      currentUser: null
     }
     
     this.onChangeMainLang = this.onChangeMainLang.bind(this);
@@ -46,6 +48,33 @@ class App extends React.Component {
     console.log(this.state.checkedItems)
   }
 
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+        if (userAuth) {
+          const userRef = await createUserProfile (userAuth);
+
+          userRef.onSnapshot(snapShot => {
+            this.setState ({currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+              }
+            })
+          })
+        } else {
+        this.setState({currentUser: userAuth})  
+        }
+      }
+    )
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth()
+  }
+
+
   onChangeMainLang(e) {
     const item = e.target.name;
     this.setState({mainLang: item});
@@ -60,7 +89,7 @@ render () {
   const languages = ['spanish', 'romanian', 'italian', 'french', 'english'] 
   return (
     <div key='appls' className="tc">
-      <Header />
+      <Header user={this.state.currentUser?this.state.currentUser.displayName:'guess'}/>
       <SignInSignUp />
       <HomePage 
                   lang ={languages} 

@@ -2,13 +2,13 @@ h1 {
     color: rgb(236, 96, 96)
 }
 .sign-in-box{
-    display: block;
+    display: inline-block;
     position: relative;
     top: 40%;
     left: 20%;
     margin-top: 20px;
     margin-right: 20px;
-    height: 60vh;
+    height: auto;
     width: 24vw;
     background-color: rgba(104, 132, 209, 0.445);
     text-align: center;

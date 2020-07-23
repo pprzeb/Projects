@@ -11,7 +11,7 @@ const MenuInitial = (props) => {
             <div className="menu">
                 <input type="checkbox"  className="menu-open" name="menu-open" id="menu-open"/>
                     <label className="menu-open-button" htmlFor="menu-open">
-                    <p>Click me:)</p>
+                    {/* <p>Click me:)</p> */}
                       <span className="lines line-1"></span>
                       <span className="lines line-2"></span>
                       <span className="lines line-3"></span>
