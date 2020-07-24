@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import './header.component.scss';
 
 import { auth } from '../../firebase/firebase.utils'
@@ -9,28 +11,28 @@ const Header = ({user}) => {
 
     return (
         <nav>
-        <div className='pushright'></div>
-        {/* <div clasName='pushright'></div> */}
-        <div>
-            <h1>Hello {user}! Welcome to Multi Lingo</h1>
-        </div>
-        {/* <div>
-            <a key='appls2' className="" href="http://localhost:3000/" title="Home">Home</a>
-        </div>
-        <div>
-            <a key='appls3' className="" href="http://localhost:3000/" onClick='' name="creationMode">CMode</a>    
-        </div> */}
-        <div className='pushright'></div>
-        <div>
-            <a key='appls5' className="option" onClick={() => auth.signOut()} href="http://localhost:3000/" title="Contact">Sign Out</a>    
-        </div>
         
-        {true?(<div>
-            <a key='appls4' className="option" href="http://localhost:3000/"  name="repetitionMode">Sign In</a>    
-        </div>):
-        (<div>
-            <a key='appls5' className="option" href="http://localhost:3000/" title="Contact">Sign Out</a>    
-        </div>)}
+        <h1 className='hello'>Hello {user}!</h1>
+        
+        
+        {/* <div clasName='pushright'></div> */}
+        <h1>Multi Lingo</h1>
+        
+       
+        {/* <div className='pushright'></div> */}
+        
+            <Link className='home' to='/'>Home</Link>
+        
+        
+            <Link className='nav-item' to="/creation">C Mode</Link>
+        
+        
+            <Link className='nav-item' to="/repetition">R Mode</Link>
+        {user==='guess'?
+        (<Link className='nav-item' to="/sign-in-sign-up">Sign In</Link>
+        ):
+        (<button key='navout' className='nav-item' onClick={() => auth.signOut()} title="Contact">Sign Out</button>    
+        )}
         </nav>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Route, Switch, Link } from 'react-router-dom';
 
 import Header from './components/header/header.component'
 import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up'
@@ -89,14 +89,20 @@ render () {
   const languages = ['spanish', 'romanian', 'italian', 'french', 'english'] 
   return (
     <div key='appls' className="tc">
-      <Header user={this.state.currentUser?this.state.currentUser.displayName:'guess'}/>
-      <SignInSignUp />
-      <HomePage 
+    <Header user={this.state.currentUser?this.state.currentUser.displayName:'guess'}/>
+    
+    <Switch>
+      <Route path='/sign-in-sign-up' component= {SignInSignUp } />
+      <Route exact path='/' render={(props) => <HomePage {...props} 
                   lang ={languages} 
                   checkedLanguages = {this.state.checkedItems} 
-                  handleLanguagesChange={this.handleLanguagesChange}
-      />
-      {/* <Checkbox 
+                  handleLanguagesChange={this.handleLanguagesChange} /> }
+                  />
+      <Route path='/creation' render={(props) => <CreationMode {...props} lang={this.state.checkedItems}/>} />
+      <Route path='/repetition' render={(props) => <RepetitionMode {...props} lang={this.state.checkedItems} mainLang={this.state.mainLang}/>} />
+    </Switch>
+      
+      <Checkbox 
                   key={this.state.mainLang} 
                   name={this.state.mainLang}
                   className="flex items-center mb2 bg-light-blue br3"
@@ -115,10 +121,8 @@ render () {
                   onChange={this.handleLanguagesChange} 
                   onChangeMainLang={this.onChangeMainLang}
                   button={true} />
-      ))} */}
-      {/* {this.state.operationMode==='creationMode'?
-        <CreationMode lang={this.state.checkedItems}/>:
-        <RepetitionMode lang={this.state.checkedItems} mainLang={this.state.mainLang}/>} */}
+      ))}
+     
     </div>     
     )
   }

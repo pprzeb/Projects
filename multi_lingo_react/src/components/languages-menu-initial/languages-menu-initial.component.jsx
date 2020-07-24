@@ -6,7 +6,7 @@ import './languages-menu-initial.component.scss'
 const MenuInitial = (props) => {
     
     return (
-        <div>
+        <div className='menu-initial'>
             <h2> Choose the languages you like to learn:</h2>
             <div className="menu">
                 <input type="checkbox"  className="menu-open" name="menu-open" id="menu-open"/>

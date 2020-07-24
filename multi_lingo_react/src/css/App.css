@@ -1,17 +1,10 @@
-h1 {
-  color: white
-}
-
-
-
-
 
 body {
   padding: 10px;
   margin: 10px;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 200% 200%;
-	animation: gradient 15s ease infinite;
+	background-size: 400% 400%;
+	animation: gradient 20s ease infinite;
   color: #EEEEEE;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
