@@ -8,6 +8,7 @@ import HomePage from './pages/homePage/homePage'
 import { createUserProfile, auth } from '../src/firebase/firebase.utils'
 
 import './css/App.css';
+import Create from './pages/creation-mode/create.component'
 import CreationMode from './CreationMode/creationMode'
 import checkboxes from './LanguagesList/checkboxes';
 import Checkbox from './LanguagesList/Checkbox';
@@ -33,6 +34,7 @@ class App extends React.Component {
     this.onChangeMainLang = this.onChangeMainLang.bind(this);
     this.handleMode = this.handleMode.bind(this);
     this.handleLanguagesChange = this.handleLanguagesChange.bind(this)
+    this.handleDrop = this.handleDrop.bind(this)
   }
   
   
@@ -74,6 +76,9 @@ class App extends React.Component {
     this.unsubscribeFromAuth()
   }
 
+  handleDrop(name) {
+    this.setState({mainLang: name})
+  }
 
   onChangeMainLang(e) {
     const item = e.target.name;
@@ -88,17 +93,19 @@ class App extends React.Component {
 render () {
   const languages = ['spanish', 'romanian', 'italian', 'french', 'english'] 
   return (
-    <div key='appls' className="tc">
+    <div key='appls'>
     <Header user={this.state.currentUser?this.state.currentUser.displayName:'guess'}/>
     
     <Switch>
       <Route path='/sign-in-sign-up' component= {SignInSignUp } />
       <Route exact path='/' render={(props) => <HomePage {...props} 
+                  mainLang = {this.state.mainLang}
                   lang ={languages} 
                   checkedLanguages = {this.state.checkedItems} 
-                  handleLanguagesChange={this.handleLanguagesChange} /> }
+                  handleLanguagesChange={this.handleLanguagesChange}
+                  onDrop={this.handleDrop} /> }
                   />
-      <Route path='/creation' render={(props) => <CreationMode {...props} lang={this.state.checkedItems}/>} />
+      <Route path='/creation' render={(props) => <Create {...props} lang={this.state.checkedItems}/>} />
       <Route path='/repetition' render={(props) => <RepetitionMode {...props} lang={this.state.checkedItems} mainLang={this.state.mainLang}/>} />
     </Switch>
       
