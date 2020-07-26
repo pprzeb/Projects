@@ -23,7 +23,7 @@ class HomePage extends React.Component {
             <h2>the best place where you can learn languages</h2>
             <DndProvider backend={HTML5Backend}>
             <MenuInitial 
-                onClick={this.props.handleLanguagesChange} 
+                // onClick={this.props.handleLanguagesChange} 
                 buttonStyle={this.props.checkedLanguages} 
                 langList={this.props.lang}
                 onDrop={this.props.onDrop}

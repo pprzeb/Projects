@@ -6,13 +6,15 @@ import './header.component.scss';
 
 import { auth } from '../../firebase/firebase.utils'
 
-const Header = ({user}) => {
+import { connect } from 'react-redux'
 
+const Header = ({user}) => {
+    // console.log(user)
 
     return (
         <nav>
         
-        <h1 className='hello'>Hello {user}!</h1>
+        <h1 className='hello'>Hello {user?user.displayName:"guess"}!</h1>
         
         
         {/* <div clasName='pushright'></div> */}
@@ -28,7 +30,7 @@ const Header = ({user}) => {
         
         
             <Link className='nav-item' to="/repetition">R Mode</Link>
-        {user==='guess'?
+        {user===null?
         (<Link className='nav-item' to="/sign-in-sign-up">Sign In</Link>
         ):
         (<button key='navout' className='nav-item' onClick={() => auth.signOut()} title="Contact">Sign Out</button>    
@@ -36,7 +38,12 @@ const Header = ({user}) => {
         </nav>
     )
 }
+const mapStateToProps = state => ({
+    user: state.user.currentUser
 
-export default Header;
+})
+
+
+export default connect(mapStateToProps)(Header);
 
 

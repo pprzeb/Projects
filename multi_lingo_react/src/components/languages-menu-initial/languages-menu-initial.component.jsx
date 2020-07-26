@@ -1,43 +1,20 @@
 import React from 'react';
 
-import { useDrag } from 'react-dnd';
+
 import { useDrop } from "react-dnd";
 
 
+
+import MenuInitialItem from '../menu-initial-item/menuInitialItem.component'
+
 import './languages-menu-initial.style.scss'
-let main = "Main"
-const MenuItem = ({buttonStyle, name, onClick, onDrop}) => {
-    const item = { name , type: 'box' };
-    const [{isDragging}, drag] = useDrag({
-        item,
-        end(item, monitor) {
-            const dropResult = monitor.getDropResult();
-            if (dropResult) {
-                const dropedItem = monitor.getItem().name
-                onDrop(dropedItem)
-            }
-            
-        }
-      })    
-
-    return (
-        <button key={name+"id"} ref={drag} className={buttonStyle.get(name)[1]} name={name} onClick={onClick}>{name}</button>
-    )
-}
-
-
 
 const MenuInitial = ({buttonStyle, langList, onClick, onDrop, mainLang}) => {
-    main = mainLang
+    let main = mainLang
 
     const [,drop] = useDrop({
         accept: 'box'
     })
-
-    
-    
-    
-    
 
     return (
         <div className='menu-initial'>
@@ -56,8 +33,8 @@ const MenuInitial = ({buttonStyle, langList, onClick, onDrop, mainLang}) => {
                         </label>
                     
                     {langList.map(item=>
-                        <MenuItem key={item} name={item} buttonStyle={buttonStyle} onClick={onClick} onDrop={onDrop}/>)}
-                    <button ref={drop} key={"mainid"} className={'menu-item mai'} name='main'><h4>Main Language:</h4> {main}</button>
+                        <MenuInitialItem key={item} name={item} buttonStyle={buttonStyle} onClick={onClick} onDrop={onDrop}/>)}
+                        <button ref={drop} key={"mainid"} className={'menu-item mai'} name='main'><h4>Main Language:</h4> {main}</button>
                 </div>
             </div>
             
