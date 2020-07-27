@@ -3,14 +3,18 @@ import React from 'react';
 
 import { useDrop } from "react-dnd";
 
+import { connect } from 'react-redux';
 
+import { setMainLang } from '../../redux/mainLang/mainLang.actions';
 
 import MenuInitialItem from '../menu-initial-item/menuInitialItem.component'
+import { languages } from '../../variables';
 
-import './languages-menu-initial.style.scss'
+import './menu-initial.style.scss'
 
-const MenuInitial = ({buttonStyle, langList, onClick, onDrop, mainLang}) => {
-    let main = mainLang
+
+const MenuInitial = ({mainLang}) => {
+    
 
     const [,drop] = useDrop({
         accept: 'box'
@@ -32,9 +36,9 @@ const MenuInitial = ({buttonStyle, langList, onClick, onDrop, mainLang}) => {
                         <span className="lines line-3"></span>
                         </label>
                     
-                    {langList.map(item=>
-                        <MenuInitialItem key={item} name={item} buttonStyle={buttonStyle} onClick={onClick} onDrop={onDrop}/>)}
-                        <button ref={drop} key={"mainid"} className={'menu-item mai'} name='main'><h4>Main Language:</h4> {main}</button>
+                    {languages.map(item=>
+                        <MenuInitialItem key={item} name={item} />)}
+                        <button ref={drop} key={"mainid"} className={'menu-item mai'} name='main'><h4>Main Language:</h4> {mainLang}</button>
                 </div>
             </div>
             
@@ -42,4 +46,12 @@ const MenuInitial = ({buttonStyle, langList, onClick, onDrop, mainLang}) => {
     )
 }
 
-export default MenuInitial
+const mapStateToProps = state => ({
+    mainLang: state.mainLang.mainLang
+})
+
+const mapDispatchToProps = dispatch => ({
+    setMainLang: payload => dispatch(setMainLang(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuInitial);

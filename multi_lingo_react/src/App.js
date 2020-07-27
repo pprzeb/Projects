@@ -1,44 +1,27 @@
 import React from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 
-import Header from './components/header/header.component'
-import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up'
-import HomePage from './pages/homePage/homePage'
+import Header from './components/header/header.component';
+import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up';
+import HomePage from './pages/homePage/homePage';
 
-import { createUserProfile, auth } from '../src/firebase/firebase.utils'
+import { createUserProfile, auth } from '../src/firebase/firebase.utils';
 
-import { connect } from 'react-redux'
-import { setCurrentUser } from './redux/user/user.actions'
-import { setLang } from './redux/languages/languages.actions'
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
+import { setLang } from './redux/langs/langs.actions';
 
-import './css/App.css';
-import Create from './pages/creation-mode/create.component'
-import CreationMode from './CreationMode/creationMode'
+import Create from './pages/creation-mode/create.component';
+import CreationMode from './CreationMode/creationMode';
 import checkboxes from './LanguagesList/checkboxes';
 import Checkbox from './LanguagesList/Checkbox';
-import RepetitionMode from './RepetitionMode/repetitionMode'
+import RepetitionMode from './RepetitionMode/repetitionMode';
 
+import './css/App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // checkedItems: new Map([
-      //   ['english', [false, 'menu-item eng']],
-      //   ['french', [false, 'menu-item fre']],
-      //   ['romanian', [false, 'menu-item rom']],
-      //   ['italian', [false, 'menu-item ita']],
-      //   ['spanish', [false, 'menu-item spa']],
-      // ]),
-      mainLang: 'english',
-      operationMode: 'creationMode',
-      // currentUser: null
-    }
-    
-    this.onChangeMainLang = this.onChangeMainLang.bind(this);
-    this.handleMode = this.handleMode.bind(this);
-    // this.handleLanguagesChange = this.handleLanguagesChange.bind(this)
-    this.handleDrop = this.handleDrop.bind(this)
   }
   
   
@@ -64,17 +47,14 @@ class App extends React.Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
         if (userAuth) {
           const userRef = await createUserProfile (userAuth);
-
           userRef.onSnapshot(snapShot => {
             setCurrentUser ({
               id: snapShot.id,
               ...snapShot.data()
             })
           })
-
         } else {
         setCurrentUser(userAuth)  
-        
         }
       }
     )
@@ -83,38 +63,25 @@ class App extends React.Component {
   componentWillUnmount() {
     this.unsubscribeFromAuth()
   }
-
-  handleDrop(name) {
-    this.setState({mainLang: name})
-  }
-
-  onChangeMainLang(e) {
-    const item = e.target.name;
-    this.setState({mainLang: item});
-    // setLang(prevState => ({checkedItems: prevState.checkedItems.set(item, true)}));    
-  }
-  
-  handleMode (e) {
-    this.setState({operationMode: e.target.name});
-  }
   
 render () {
-  const languages = ['spanish', 'romanian', 'italian', 'french', 'english'] 
+  // const languages = ['spanish', 'romanian', 'italian', 'french', 'english'] 
   return (
     <div key='appls'>
     <Header />
-    
     <Switch>
       <Route path='/sign-in-sign-up' component= {SignInSignUp } />
       <Route exact path='/' render={(props) => <HomePage {...props} 
-                  mainLang = {this.state.mainLang}
-                  lang ={languages} 
+                  // mainLang = {this.state.mainLang}
+                  // lang ={languages} 
                   // checkedLanguages = {this.state.checkedItems} 
-                  handleLanguagesChange={this.handleLanguagesChange}
-                  onDrop={this.handleDrop} /> }
+                  // handleLanguagesChange={this.handleLanguagesChange}
+                  // onDrop={this.handleDrop} 
+
+                  /> }
                   />
-      <Route path='/creation' render={(props) => <Create {...props} lang={this.state.checkedItems}/>} />
-      <Route path='/repetition' render={(props) => <RepetitionMode {...props} lang={this.state.checkedItems} mainLang={this.state.mainLang}/>} />
+      <Route path='/creation' component= {Create} />
+      <Route path='/repetition' render={(props) => <RepetitionMode />} />
     </Switch>
       
       {/* <Checkbox 

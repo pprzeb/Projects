@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
 
 import userReducer from './user/user.reducer';
-import langReducer from './languages/languages.reducer'
+import langsReducer from './langs/langs.reducer';
+import mainLangReducer from './mainLang/mainLang.reducer'
+
 
 export default combineReducers({
     user: userReducer,
-    lang: langReducer
+    langs: langsReducer,
+    mainLang: mainLangReducer,
 
 })
 

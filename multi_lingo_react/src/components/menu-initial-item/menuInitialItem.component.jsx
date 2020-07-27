@@ -5,16 +5,18 @@ import { useDrag } from 'react-dnd';
 
 import { connect } from 'react-redux'
 
-import { setLang } from '../../redux/languages/languages.actions'
+import { setLang } from '../../redux/langs/langs.actions'
 
-
+import { setMainLang } from '../../redux/mainLang/mainLang.actions';
 
 import './menuInitialItem.style.scss'
 
 
+
 const MenuInitialItem = (props) => {
 
-    const {name, onDrop, setLang} = props
+    const {name, setMainLang, setLang} = props;
+
     const item = { name , type: 'box' };
     const [{isDragging}, drag] = useDrag({
         item,
@@ -22,7 +24,8 @@ const MenuInitialItem = (props) => {
             const dropResult = monitor.getDropResult();
             if (dropResult) {
                 const dropedItem = monitor.getItem().name
-                onDrop(dropedItem)
+                setMainLang(dropedItem)
+                
             }
             
         }
@@ -37,10 +40,9 @@ const MenuInitialItem = (props) => {
         let buttonStyle;
         if (isChecked) {buttonStyle = `menu-item ${abr} active`} else {buttonStyle = `menu-item ${abr}`} ;
         let setButtonStyle = [isChecked, buttonStyle]
-        // this.setState(prevState => ({checkedItems: prevState.checkedItems.set(item, setButtonStyle)}));
+                
+        setLang({item, setButtonStyle}) 
         
-        setLang({item, setButtonStyle})
-        console.log(props.checkedItems)
         
       }
 
@@ -51,11 +53,13 @@ const MenuInitialItem = (props) => {
     )
 }
 const mapStateToProps = state => ({
-    checkedItems: state.lang.checkedItems
+    checkedItems: state.langs.checkedItems
 })
 
+
 const mapDispatchToProps = dispatch => ({
-    setLang: payload => dispatch(setLang(payload))
+    setLang: payload => dispatch(setLang(payload)),
+    setMainLang: payload => dispatch(setMainLang(payload))
   })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuInitialItem)

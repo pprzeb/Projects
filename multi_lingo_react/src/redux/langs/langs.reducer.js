@@ -8,17 +8,16 @@ const INITIAL_STATE = {
       ])
 }
 
-const langReducer = (state = INITIAL_STATE, action) => {
+const langsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'SET_LANG':
-            
+        case 'SET_LANGS':
             return {
                 ...state,
-                checkedItems: state.checkedItems.set(action.payload.item, action.payload.setButtonStyle)
+                checkedItems: new Map(state.checkedItems.set(action.payload.item, action.payload.setButtonStyle))
             }
         default:
             return state
     }
 }
 
-export default langReducer;
+export default langsReducer;

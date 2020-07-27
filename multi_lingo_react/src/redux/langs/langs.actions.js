@@ -1,4 +1,4 @@
 export const setLang = (payload) => ({
-    type: 'SET_LANG',
+    type: 'SET_LANGS',
     payload: payload
 })
