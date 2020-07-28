@@ -1,18 +1,15 @@
 import React from 'react';
 
-
 import MainComponent from '../../components/main-component/main-component.component'
 
-import './create.style.scss'
+import './repetition.style.scss';
 
-const Create = () => {
-    return (
+const RepetitionPage = () => {
+    return(
         <div>
             <MainComponent />
         </div>
-
-    )
+    )   
 }
 
-
-export default Create 
+export default RepetitionPage

@@ -11,7 +11,9 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { setLang } from './redux/langs/langs.actions';
 
-import Create from './pages/creation-mode/create.component';
+import Creation from './pages/creationPage/creation.component';
+import Repetition from './pages/repetitionPage/repetition.component'
+
 import CreationMode from './CreationMode/creationMode';
 import checkboxes from './LanguagesList/checkboxes';
 import Checkbox from './LanguagesList/Checkbox';
@@ -71,17 +73,9 @@ render () {
     <Header />
     <Switch>
       <Route path='/sign-in-sign-up' component= {SignInSignUp } />
-      <Route exact path='/' render={(props) => <HomePage {...props} 
-                  // mainLang = {this.state.mainLang}
-                  // lang ={languages} 
-                  // checkedLanguages = {this.state.checkedItems} 
-                  // handleLanguagesChange={this.handleLanguagesChange}
-                  // onDrop={this.handleDrop} 
-
-                  /> }
-                  />
-      <Route path='/creation' component= {Create} />
-      <Route path='/repetition' render={(props) => <RepetitionMode />} />
+      <Route exact path='/' render={(props) => <HomePage {...props}/>} />
+      <Route path='/creation' component= {Creation} />
+      <Route path='/repetition' render={(props) => <Repetition />} />
     </Switch>
       
       {/* <Checkbox 

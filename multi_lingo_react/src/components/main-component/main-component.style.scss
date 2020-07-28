@@ -1,10 +1,12 @@
 .mainComponent {
     background-color: rgba(255, 255, 255, 0.281);
-    width: 80%;
+    width: 90%;
     height: 80vh;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-self: center;
+    align-items: flex-start;
+    align-content: flex-start;
     margin-top: 2%;
-    margin-left: 10%;
+    margin-left: 5%;
 }
