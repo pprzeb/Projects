@@ -6,14 +6,20 @@ import './wordsList.style.scss';
 
 const WordsList = () => {
     return(
-        <ul>
-            <li>
-                <div>1</div>
-                <div>english</div>
-                <div>french</div>
-                <div>romanian</div>
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <th>english</th>
+                <th>f</th>
+                <th>romanian</th>
+            </tr>
+            <tr>
+                <td>hello</td>  
+                <td>fsdf</td>
+                <td>dfasd</td>
+            </tr>
+                
+        </table>
+        
     )
 }
 

@@ -24,12 +24,17 @@ $secondaryColor: orange !default;
     cursor: pointer;
     font-size: 24px;
     color: white;
+    bor
 
     &:hover{
         transform:translatey(5px);
         box-shadow: none;
       }
-      &:active{
+    &:active{
         opacity: 0.5;
+        outline: none
       }
+    &:focus{
+      outline: none
+    }
 }

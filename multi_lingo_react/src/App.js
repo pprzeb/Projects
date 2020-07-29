@@ -38,7 +38,7 @@ class App extends React.Component {
   //   // this.setState(prevState => ({checkedItems: prevState.checkedItems.set(item, setButtonStyle)}));
   //   this.props.setLang({item, setButtonStyle})
   // }
-
+ 
 
   unsubscribeFromAuth = null;
 
