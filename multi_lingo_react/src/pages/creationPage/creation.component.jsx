@@ -9,11 +9,9 @@ import styled from 'styled-components';
 
 import './creation.style.scss'
 
-const Button = styled.button`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`
+
+
+
 
 const Creation = () => {
 
@@ -21,13 +19,18 @@ const Creation = () => {
     return (
         <div>
             <MainComponent>
-                <CustomInput langName='spanish'/>
-                <CustomInput langName='english'/>
-                <CustomInput langName='french'/>
-                <CustomInput langName='italian'/>
-                <CustomInput langName='romanian'/>
-                <CustomButton butt='blabla'  onClick={handler} value='fdf'>wow fsadlfaksdjf</CustomButton>
-                <Button> hello </Button>
+                <CustomInput langName='spanish' labelColor='orange'/>
+                <CustomInput langName='english' labelColor='violet'/>
+                <CustomInput langName='french' labelColor='caraibbean'/>
+                <CustomInput langName='italian' labelColor='green'/>
+                <CustomInput langName='romanian' labelColor='pink'/>
+                <CustomButton violet onClick={handler} value='fdf'>english</CustomButton>
+                <CustomButton orange onClick={handler} value='fdf'>romanian</CustomButton>
+                <CustomButton green onClick={handler} value='fdf'>polish</CustomButton>
+                <CustomButton caraibbean widthFix onClick={handler} value='fdf'>french</CustomButton>
+                <CustomButton pink widthFix onClick={handler} value='fdf'>Add</CustomButton>
+                <CustomButton onClick={handler} value='fdf'>send</CustomButton>
+                
                 <WordsList />
             </MainComponent>
             

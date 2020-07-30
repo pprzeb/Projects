@@ -1,16 +1,19 @@
 import React from 'react';
 
-import './customInput.style.scss';
+import './customInput.style.scss'
 
-const CustomInput = ({langName, active, inputHandler}) => {
 
-    const className = `input skinny ${active}`
+
+
+const CustomInput = ({langName, labelColor, inputHandler}) => {
+
+    
     
     return (
         <div>
             <span>
-            <input id='first' className={className} type='text' onChange={inputHandler} placeholder="type some word here"/>
-            <label htmlFor='first' className='label'>{langName}</label>
+            <input id='first' className='basic-slide' type='text' onChange={inputHandler} placeholder="type some word here"/>
+            <label htmlFor='first' className={labelColor}>{langName}</label>
             </span>
         </div>
     )

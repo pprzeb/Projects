@@ -7,16 +7,18 @@ import './wordsList.style.scss';
 const WordsList = () => {
     return(
         <table>
-            <tr>
+            <tbody><tr>
                 <th>english</th>
                 <th>f</th>
                 <th>romanian</th>
             </tr>
-            <tr>
+            </tbody>
+            <tbody><tr>
                 <td>hello</td>  
                 <td>fsdf</td>
                 <td>dfasd</td>
             </tr>
+            </tbody>
                 
         </table>
         
