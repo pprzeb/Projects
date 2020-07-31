@@ -1,0 +1,16 @@
+.repWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    
+
+}

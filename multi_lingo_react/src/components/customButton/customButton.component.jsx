@@ -1,9 +1,6 @@
 
 import styled from 'styled-components';
 
-
-
-
 const color = props =>{
 	if (props.violet) {
 		return ('#540D6E')

@@ -20,7 +20,7 @@ class HomePage extends React.Component {
         return (
         <div>
             <DndProvider backend={HTML5Backend}>
-            <MenuInitial />
+                <MenuInitial />
             </DndProvider>
             
         </div>
