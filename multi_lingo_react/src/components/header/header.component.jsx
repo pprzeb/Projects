@@ -9,7 +9,7 @@ import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 
 const Header = ({user}) => {
-    // console.log(user)
+    console.log(user)
 
     return (
         <nav>

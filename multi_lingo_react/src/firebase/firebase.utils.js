@@ -38,10 +38,25 @@ export const createUserProfile = async (userAuth, additionalData) => {
    }
    
 return userRef
-
-
 }
 
+export const addWordsToDB = async (userAuth, data) => {
+  if (!userAuth) return;
+
+  const wordsRef = firestore.collection('users').doc(`${userAuth.id}`).collection('words')
+ 
+  const createdAt = new Date();
+  const {...all} = data
+  try {
+    await wordsRef.add({
+      createdAt,
+      ...all
+    })
+  } catch (err) {
+    console.log('error adding word', err)
+  }
+  
+}
 
 export const auth = firebase.auth();
 

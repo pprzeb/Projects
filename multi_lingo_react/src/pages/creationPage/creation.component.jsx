@@ -6,7 +6,7 @@ import CustomInput from '../../components/customInput/customInput.component'
 import CustomButton from '../../components/customButton/customButton.component'
 import WordsList from '../../components/wordsList/wordsList.component'
 
-
+import {addWordsToDB, firestore} from '../../firebase/firebase.utils'
 
 
 import './creation.style.scss'
@@ -16,7 +16,15 @@ import './creation.style.scss'
 
 
 const Creation = () => {
-
+    const handlerAdd = async (e) => {
+        let data = {
+            english: 'tdfsd ',
+            french: 'hello ',
+            italian: 'ciao'
+        }
+        console.log(e.target)
+        await addWordsToDB(this.props.user, data)
+    }
     const handler = (e) => console.log(e.target.id)
     return (
         <div >
