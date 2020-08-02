@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
 const StyledInput = styled.input`
     display: inline-block;
-    width: ${props => props.inputSize || '12rem'};
+    width: ${props => props.inputSize || '90%'};
     padding: 8px 0 7px 15px;
     font-family: "Open Sans", sans;
     font-size: 1.2rem;
@@ -50,7 +50,7 @@ const StyledLabel = styled.label`
       position: absolute;
       top: 0;
       left: 0;
-      width: ${props => props.labelSize || '4rem' };
+      width: ${props => props.labelSize || '30%' };
       font-size: 0.8em;
       color: white;
       letter-spacing: 0.1em;

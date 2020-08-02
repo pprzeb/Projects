@@ -2,7 +2,7 @@ import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
     currentUser: null,
-    userWordsCollection: {}
+    userWordsCollection: []
     
 }
 
@@ -12,10 +12,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case userActionTypes.SET_CURRENT_USER: 
             return {
                 ...state, 
-                currentUser: action.payload,
-                userWordsCollection: action.collection
-                
+                currentUser: action.payload,              
+            }
+        case userActionTypes.GET_USER_WORDS_COLLECTION:
+            
+            return {
+                ...state,
+                userWordsCollection: action.payload
             }   
+            
        
         default:
             return state;

@@ -8,7 +8,7 @@ import HomePage from './pages/homePage/homePage';
 import { createUserProfile, auth, firestore } from '../src/firebase/firebase.utils';
 
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.actions';
+import { setCurrentUser, getUserWordsCollection } from './redux/user/user.actions';
 import { setLang } from './redux/langs/langs.actions';
 
 import Creation from './pages/creationPage/creation.component';
@@ -44,7 +44,7 @@ class App extends React.Component {
 
   componentDidMount() {
     
-    const { setCurrentUser } = this.props
+    const { setCurrentUser, getUserWordsCollection } = this.props
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       
@@ -52,21 +52,19 @@ class App extends React.Component {
           const userRef = await createUserProfile (userAuth);
           userRef.onSnapshot(snapShot => {
             const docRef = firestore.collection('users').doc(`${snapShot.id}`).collection('words');
-            let collection
+            const collection = []
             docRef.get().then( querySnapshot => {
                 querySnapshot.forEach( doc => {
-                    collection = {...collection,
-                      [doc.id]: doc.data()
-                    }
+                    collection.push([doc.id, doc.data()])
                 })
-      
-                setCurrentUser ({
-                  id: snapShot.id,
-                  ...snapShot.data()
-                }, collection)
+                getUserWordsCollection(collection)
+                
             });
             
-          
+            setCurrentUser ({
+              id: snapShot.id,
+              ...snapShot.data()
+            })
           })
           
         } else {
@@ -118,7 +116,8 @@ render () {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: (user, collection) => dispatch(setCurrentUser(user,collection)),
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  getUserWordsCollection: collection => dispatch(getUserWordsCollection(collection)),
   setLang: payload => dispatch(setLang(payload))
 })
 
