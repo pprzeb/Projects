@@ -5,7 +5,7 @@ import Header from './components/header/header.component';
 import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up';
 import HomePage from './pages/homePage/homePage';
 
-import { createUserProfile, auth } from '../src/firebase/firebase.utils';
+import { createUserProfile, auth, firestore } from '../src/firebase/firebase.utils';
 
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
@@ -47,14 +47,28 @@ class App extends React.Component {
     const { setCurrentUser } = this.props
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-        if (userAuth) {
+      
+      if (userAuth) {
           const userRef = await createUserProfile (userAuth);
           userRef.onSnapshot(snapShot => {
-            setCurrentUser ({
-              id: snapShot.id,
-              ...snapShot.data()
-            })
+            const docRef = firestore.collection('users').doc(`${snapShot.id}`).collection('words');
+            let collection
+            docRef.get().then( querySnapshot => {
+                querySnapshot.forEach( doc => {
+                    collection = {...collection,
+                      [doc.id]: doc.data()
+                    }
+                })
+      
+                setCurrentUser ({
+                  id: snapShot.id,
+                  ...snapShot.data()
+                }, collection)
+            });
+            
+          
           })
+          
         } else {
         setCurrentUser(userAuth)  
         }
@@ -104,7 +118,7 @@ render () {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  setCurrentUser: (user, collection) => dispatch(setCurrentUser(user,collection)),
   setLang: payload => dispatch(setLang(payload))
 })
 

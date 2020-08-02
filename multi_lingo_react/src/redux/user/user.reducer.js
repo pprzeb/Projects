@@ -2,6 +2,7 @@ import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
     currentUser: null,
+    userWordsCollection: {}
     
 }
 
@@ -12,6 +13,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 currentUser: action.payload,
+                userWordsCollection: action.collection
                 
             }   
        

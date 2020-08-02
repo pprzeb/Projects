@@ -4,9 +4,9 @@ import MainComponent from '../../components/main-component/main-component.compon
 import CustomInput from '../../components/customInput/customInput.component';
 import CustomButton from '../../components/customButton/customButton.component'
 import './repetition.style.scss';
-import {db} from '../../example';
 
-import {addWordsToDB, firestore, auth} from '../../firebase/firebase.utils'
+
+import {addWordsToDB, firestore} from '../../firebase/firebase.utils'
 
 import { connect } from 'react-redux';
 
@@ -15,9 +15,7 @@ class RepetitionPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            docIDS: [],
-            activeWord: ' ',
-            activeWordIndex: 0
+            nostate: 'nostate'
         }
 
         this.handlerInput = this.handlerInput.bind(this);
@@ -25,41 +23,18 @@ class RepetitionPage extends React.Component {
         this.handlerClickTest = this.handlerClickTest.bind(this);
         this.nextWord = this.nextWord.bind(this)
     }
-    getdata = () => {
-        if (!this.props.user) return;
-        const docRef = firestore.collection('users').doc(`${this.props.user.id}`).collection('words')
-        const docIDS = []
-        
-        docRef.get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                docIDS.push(doc.id) 
-            }) 
-        })
-
-        this.setState({docIDS: docIDS})
-        setTimeout(this.nextWord, 1000)
-    }
-
+    
     componentDidMount() {
-      if (this.props.user) {
-           this.getdata()
-        } else setTimeout(this.getdata, 1000)
-        
+        console.log('ww', this.props.userWordsCollection)
     }
     
     async nextWord () {
-        const docRef = firestore.collection('users').doc(`${this.props.user.id}`)
-            .collection('words')
-            .doc(this.state.docIDS[this.state.activeWordIndex])
-        await docRef.get().then(data => {this.setState({activeWord: data.data().english})})
-        this.setState({activeWordIndex: this.state.activeWordIndex+1})
         
     }
     
     handlerInput = (e) => {
-        console.log(e.target.id, e.target.value)
-        
-        }
+        console.log(e.target.id, e.target.value)    
+    }
 
     handlerCheck = async (e) => {
         let data = {
@@ -76,6 +51,10 @@ class RepetitionPage extends React.Component {
         
     }
 
+    test = () => {
+        console.log(this.props.userWordsCollection)
+    }
+
     render() { 
     const {checkedLangs} = this.props;
     const inputs = [];
@@ -88,7 +67,8 @@ class RepetitionPage extends React.Component {
             inputs.push(<CustomInput id={key+'Example'} key={key+'Example'} onChange={this.handlerInput} inputSize='30rem' hidden />)
         }
     } )
-    
+    console.log('fd', this.props.userWordsCollection)
+    let x = this.props.userWordsCollection.one?this.props.userWordsCollection.one.english:'loading...'
     return(
         <div>
             <MainComponent>
@@ -96,6 +76,7 @@ class RepetitionPage extends React.Component {
                 <div>
                     <h5>{this.state.activeWord}</h5>
                     <h6>{this.state.activeWordIndex}</h6>
+                    <h1>{this.props.userWordsCollection?x:'n'}</h1>
                     
                 </div>
                 <div className='wrapper'>
@@ -104,6 +85,7 @@ class RepetitionPage extends React.Component {
                 <div>
                     <CustomButton onClick={this.handlerCheck}>Check</CustomButton>
                     <CustomButton onClick={this.nextWord}>Next</CustomButton>
+                    <CustomButton onClick={this.test}>test</CustomButton>
                     
                 </div>
                 </div>
@@ -116,7 +98,8 @@ class RepetitionPage extends React.Component {
 
 const mapStateToProps = state => ({
     checkedLangs: state.langs.checkedItems,
-    user: state.user.currentUser
+    user: state.user.currentUser,
+    userWordsCollection: state.user.userWordsCollection
 })
 
 export default connect(mapStateToProps)(RepetitionPage);
