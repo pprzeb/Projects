@@ -1,23 +1,39 @@
 import React from 'react';
 
 import './wordsList.style.scss';
+import {firestore } from '../../firebase/firebase.utils'
+import {connect} from 'react-redux';
+
+const WordsList = (props) => {
+    const lang = []
+    const th = [];
+    let trs = [];
+    
+    if (props.userWordsCollection[0]) 
+    {
+    props.checkedLangs.forEach((item, key) => {
+        if (!item[0]) {
+            return
+        } else {
+            th.push(<th key={key+'th'} id={key}>{key}</th>);
+            lang.push(key)
+            
+        }
+    })} 
+
+    
 
 
 
-const WordsList = () => {
     return(
         <table>
-            <tbody><tr>
-                <th>english</th>
-                <th>f</th>
-                <th>romanian</th>
+            <tbody>
+            <tr>
+                {th}
             </tr>
             </tbody>
-            <tbody><tr>
-                <td>hello</td>  
-                <td>fsdf</td>
-                <td>dfasd</td>
-            </tr>
+            <tbody>
+                {trs}
             </tbody>
                 
         </table>
@@ -25,4 +41,10 @@ const WordsList = () => {
     )
 }
 
-export default WordsList
+const mapStateToProps = state => ({
+    checkedLangs: state.langs.checkedItems,
+    user: state.user.currentUser,
+    userWordsCollection: state.user.userWordsCollection,
+})
+
+export default connect(mapStateToProps)(WordsList)

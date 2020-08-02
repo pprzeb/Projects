@@ -5,10 +5,10 @@ import CustomInput from '../../components/customInput/customInput.component';
 import CustomButton from '../../components/customButton/customButton.component'
 import './repetition.style.scss';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 
-import {addWordsToDB, firestore} from '../../firebase/firebase.utils'
+
 
 import { connect } from 'react-redux';
 
@@ -81,7 +81,6 @@ class RepetitionPage extends React.Component {
         this.setState({
             [e.target.id]: e.target.value
         })
-
      }
 
     

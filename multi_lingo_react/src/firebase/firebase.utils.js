@@ -52,6 +52,7 @@ export const addWordsToDB = async (userAuth, data) => {
       createdAt,
       ...all
     })
+    console.log('added with success')
   } catch (err) {
     console.log('error adding word', err)
   }

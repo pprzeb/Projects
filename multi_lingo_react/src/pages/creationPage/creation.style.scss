@@ -1,8 +1,10 @@
+.creationPage {
+    text-align: center;
+}
+
 .creWrapper {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
+    // grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
     align-content: center;
