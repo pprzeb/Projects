@@ -44,8 +44,9 @@ class Creation extends React.Component{
             const collection = [];
             docRef.get().then( querySnapshot => {
                 querySnapshot.forEach( doc => {
-                    collection.push([doc.id, doc.data()])
+                    collection.push([doc.id, doc.data(), doc.data().createdAt])
                 });
+                collection.sort((a,b) => b[2] -  a[2])
                 getUserWordsCollection(collection);
                 });
             

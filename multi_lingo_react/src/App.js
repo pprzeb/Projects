@@ -37,12 +37,12 @@ class App extends React.Component {
             const docRef = firestore.collection('users').doc(`${snapShot.id}`).collection('words');
             const collection = []
             docRef.get().then( querySnapshot => {
-              console.log('qs', querySnapshot.docs[0].data().createdAt)
+              
                 querySnapshot.forEach( doc => {
                     collection.push([doc.id, doc.data(), doc.data().createdAt])
                 })
-                collection.sort((a,b) => a -b )
-                console.log(collection)
+                collection.sort((a,b) => b[2] -  a[2])
+                
                 getUserWordsCollection(collection)
                 
             });

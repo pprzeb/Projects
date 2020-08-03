@@ -8,7 +8,7 @@ const WordsList = (props) => {
     const langs = []
     const th = [];
     let trs = [];
-    console.log(props.userWordsCollection)
+    
     
     if (props.userWordsCollection[0]) 
     {
