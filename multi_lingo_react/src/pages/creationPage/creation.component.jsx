@@ -37,7 +37,14 @@ class Creation extends React.Component{
             italian: this.state.italian,
             spanish: this.state.spanish
         }
-        
+        this.setState({
+            english: '',
+            french: '',
+            romanian: '',
+            italian: '',
+            spanish: '',
+        })
+
         const { user, getUserWordsCollection } = this.props
 
         const docRef = firestore.collection('users').doc(`${user.id}`).collection('words');
@@ -52,6 +59,8 @@ class Creation extends React.Component{
             
         
         await addWordsToDB(user, data)
+
+        
     
     }
 
@@ -69,7 +78,7 @@ class Creation extends React.Component{
     this.props.checkedLangs.forEach((item, key) => {
         if (!item[0]) {
             return
-        } else {langs.push(<CustomInput key={key+'inputCreation'} id={key} label={key} onChange={this.handlerInput} inputSize='90%'/>)}}
+        } else {langs.push(<CustomInput key={key+'inputCreation'} id={key} label={key} value={this.state[key]} onChange={this.handlerInput} inputSize='90%'/>)}}
         )
     
     

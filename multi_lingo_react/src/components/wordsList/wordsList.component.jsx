@@ -1,49 +1,78 @@
 import React from 'react';
 
 import './wordsList.style.scss';
-import {firestore } from '../../firebase/firebase.utils'
+import { deleteWordFromDB, firestore } from '../../firebase/firebase.utils';
+import CustomButton from '../../components/customButton/customButton.component'
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 
-const WordsList = (props) => {
-    const langs = []
-    const th = [];
-    let trs = [];
+import {getUserWordsCollection} from '../../redux/user/user.actions'
+
+
+
+
+const WordsList = ({checkedLangs, userWordsCollection, user, getUserWordsCollection}) => {
+    const activeLangs = []
+    const head = [];
+    let rows = [];
     
     
-    if (props.userWordsCollection[0]) 
+    if (userWordsCollection[0]) 
     {
-    props.checkedLangs.forEach((item, key) => {
+    checkedLangs.forEach((item, key) => {
         if (!item[0]) {
             return
         } else {
-            th.push(<th key={key+'th'} id={key}>{key}</th>);
-            langs.push(key)
+            head.push(<div key={key+'th'} className='headI'><p id={key}>{key}</p></div>);
+            activeLangs.push(key)
             
-        }
+        }   
     })} 
-    const rowCreate = (el, lang) => {return <td>{el[1][lang]}</td>}
 
-    props.userWordsCollection.forEach(item => {
-        trs.push(<tr>
-                {langs.map(elem => rowCreate(item,elem))}
-                </tr>)
-    })
+    const handleDelete = (e) => {
+        console.log(e.target)
+        deleteWordFromDB(user, e.target.id );
+        const docRef = firestore.collection('users').doc(`${user.id}`).collection('words');
+        const collection = [];
+        docRef.get().then( querySnapshot => {
+                querySnapshot.forEach( doc => {
+                    collection.push([doc.id, doc.data(), doc.data().createdAt])
+                });
+                collection.sort((a,b) => b[2] -  a[2])
+                getUserWordsCollection(collection);
+         });
+    }
+
     
 
+    
 
+    const rowCreate = (el, lang) => {return <div key={el[0]+lang+'div'} className='item'><p key={el[0]+lang} id={el[0]+lang}>{el[1][lang]}</p></div>}
+
+    userWordsCollection.forEach(item => {
+        rows.push(activeLangs.map(elem => rowCreate(item,elem)))
+        rows.push(<CustomButton key={item+'delBtn'} className='deleteBtn' id={item[0]} onClick={handleDelete}>Delete</CustomButton>)
+        
+    })
+    
+    const GridWrapper = styled.div`
+    margin: 5px;
+    display: grid;
+    grid-template-columns: repeat(${activeLangs.length+1}, 15%);
+    grid-template-rows: auto;
+    justify-content: center;
+    gap: 10px 10px;
+    `
 
     return(
-        <table>
-            <tbody>
-            <tr>
-                {th}
-            </tr>
-            </tbody>
-            <tbody>
-                {trs}
-            </tbody>
-                
-        </table>
+        <div>
+        <GridWrapper>
+            {head}
+        </GridWrapper>
+        <GridWrapper>
+            {rows}
+        </GridWrapper>  
+        </div>
         
     )
 }
@@ -54,4 +83,10 @@ const mapStateToProps = state => ({
     userWordsCollection: state.user.userWordsCollection,
 })
 
-export default connect(mapStateToProps)(WordsList)
+const mapDispatchToProps = dispatch => ({
+    getUserWordsCollection: collection => dispatch(getUserWordsCollection(collection)),
+  })
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(WordsList)

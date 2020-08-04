@@ -59,6 +59,18 @@ export const addWordsToDB = async (userAuth, data) => {
   
 }
 
+export const deleteWordFromDB = async (userAuth, wordId) => {
+  if (!userAuth) return;
+  
+  const wordsRef = firestore.collection('users').doc(`${userAuth.id}`).collection('words')
+  
+  try {
+    await wordsRef.doc(`${wordId}`).delete().then(()=> console.log('deleted successfully'))
+  } catch (err) {
+    console.log('error deleting word', err)
+  }
+}
+
 export const auth = firebase.auth();
 
 export const firestore = firebase.firestore();

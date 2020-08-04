@@ -36,7 +36,6 @@ class RepetitionPage extends React.Component {
         this.state = {
             
             collectionIndex: 0,
-            userWordsCollection: '',
             hidden: true,
             englishInput: '',
             frenchInput: '',
