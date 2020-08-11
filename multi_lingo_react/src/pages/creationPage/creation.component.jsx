@@ -93,13 +93,7 @@ class Creation extends React.Component{
                 <div>
                 
                 <CustomButton onClick={this.handlerAdd}>Add</CustomButton>
-                {/* <CustomButton violet onClick={handler} value='fdf'>english</CustomButton>
-                <CustomButton orange onClick={handler} value='fdf'>romanian</CustomButton>
-                <CustomButton green onClick={handler} value='fdf'>polish</CustomButton>
-                <CustomButton caraibbean widthFix onClick={handler} value='fdf'>french</CustomButton>
-                <CustomButton  pink widthFix onClick={handler} value='fdf'>Add</CustomButton>
-                
-                <CustomInput label='romanian' labelColor='green' labelSize='4rem' onChange={handler}/> */}
+              
                 <WordsList />
                 </div>
             </MainComponent>

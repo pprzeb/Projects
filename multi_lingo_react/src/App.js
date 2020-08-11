@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/header/header.component';
 import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up';
@@ -19,9 +19,7 @@ import Repetition from './pages/repetitionPage/repetition.component'
 import './css/App.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  
   
   unsubscribeFromAuth = null;
 

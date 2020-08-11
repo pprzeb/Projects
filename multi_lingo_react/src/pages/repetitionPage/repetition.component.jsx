@@ -7,9 +7,6 @@ import './repetition.style.scss';
 
 import styled from 'styled-components';
 
-
-
-
 import { connect } from 'react-redux';
 
 const CorrectionWord = styled.p`
@@ -73,7 +70,7 @@ class RepetitionPage extends React.Component {
         this.setState({
                     hidden: false
             })
-            console.log(this.state)
+            
         }
     
     handlerInput = (e) => {
@@ -96,7 +93,9 @@ class RepetitionPage extends React.Component {
         'loading...'
 
     checkedLangs.forEach((item, key) => {
-        if (!item[0]) {
+        
+        
+        if (!item[0] || key === mainLang) {
             return
         } else {
             inputs.push(<CustomInput 

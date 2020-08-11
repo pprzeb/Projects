@@ -18,7 +18,7 @@ const MenuInitialItem = (props) => {
     const {name, setMainLang, setLang} = props;
 
     const item = { name , type: 'box' };
-    const [{isDragging}, drag] = useDrag({
+    const [, drag] = useDrag({
         item,
         end(item, monitor) {
             const dropResult = monitor.getDropResult();

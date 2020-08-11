@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const labelColor = props =>{
-	if (props.violet || props.children=='spanish') {
+	if (props.violet || props.children==='spanish') {
         return ('#540D6E')
 	} else if (props.pink || props.children==='romanian')  {
 		return ('#EE4266')
