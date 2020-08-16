@@ -13,10 +13,12 @@ import { setLang } from './redux/langs/langs.actions';
 
 import Creation from './pages/creationPage/creation.component';
 import Repetition from './pages/repetitionPage/repetition.component'
-
+import TestPage from './pages/testPage/testPage';
 
 
 import './css/App.css';
+
+
 
 class App extends React.Component {
   
@@ -67,11 +69,13 @@ render () {
   return (
     <div key='appls'>
     <Header />
+    
     <Switch>
       <Route path='/sign-in-sign-up' component= {SignInSignUp } />
       <Route exact path='/' render={(props) => <HomePage {...props}/>} />
       <Route path='/creation' component= {Creation} />
       <Route path='/repetition' render={(props) => <Repetition />} />
+      <Route path='/testPage' component={TestPage} />
     </Switch>
      
     </div>     

@@ -16,7 +16,9 @@ const Header = ({user}) => {
         
         <h1 className='hello'>Hello {user?user.displayName:"guess"}!</h1>
         <h1>Multi Lingo</h1>
+        
         <Link className='home' to='/'>Home</Link>
+        <Link className='nav-item' to='/testPage'>Test</Link>
         <Link className='nav-item' to="/creation">C Mode</Link>
         <Link className='nav-item' to="/repetition">R Mode</Link>
         {user===null?
