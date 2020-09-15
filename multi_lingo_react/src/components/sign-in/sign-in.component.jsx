@@ -4,7 +4,7 @@ import './sign-in.style.scss'
 
 
 
-import { signInWithGoogle, auth } from '../../firebase/firebase.utils';
+import { signInWithGoogle, auth } from '../../utils/firebase.utils';
 
 const SignIn = () => {
     

@@ -3,7 +3,7 @@ import {CognitiveServicesCredentials} from 'ms-rest-azure';
 import Search from 'azure-cognitiveservices-search';
 
 
-let serviceKey = "ea1a034684c54865a887a70b31be0df7"
+let serviceKey = ' '
 let credentials = new CognitiveServicesCredentials(serviceKey);
 
 let imageSearchApiClient = new Search.ImageSearchAPIClient(credentials);
@@ -12,7 +12,15 @@ console.log(credentials)
 console.log(Search)
 console.log(imageSearchApiClient)
 
-
+// const config = {
+//     apiKey: process.env.apiKey,
+//     authDomain: process.env.authDomain,
+//     databaseURL: process.env.databaseURL,
+//     projectId: process.env.projectId,
+//     storageBucket: process.env.storageBucket,
+//     messagingSenderId: process.env.messagingSenderId,
+//     appId: process.env.app
+//   };
 export const searchImageBing = async (searchTerm) => {
     let firstImageResult;
     let allResult;

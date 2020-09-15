@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './header.component.scss';
 
-import { auth } from '../../firebase/firebase.utils'
+import { auth } from '../../utils/firebase.utils'
 
 import { connect } from 'react-redux'
 
@@ -18,9 +18,9 @@ const Header = ({user}) => {
         <h1>Multi Lingo</h1>
         
         <Link className='home' to='/'>Home</Link>
-        <Link className='nav-item' to='/testPage'>Test</Link>
-        <Link className='nav-item' to="/creation">C Mode</Link>
-        <Link className='nav-item' to="/repetition">R Mode</Link>
+        
+        <Link className='nav-item' to="/creation">Create your words</Link>
+        <Link className='nav-item' to="/repetition">Repeate</Link>
         {user===null?
         (<Link className='nav-item' to="/sign-in-sign-up">Sign In</Link>
         ):

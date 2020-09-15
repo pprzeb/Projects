@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {searchImageBing} from './searchImage'
+
+import {searchImageBing} from '../../utils/searchImage.js'
 
 
 class TestPage extends React.Component {
@@ -13,6 +14,9 @@ class TestPage extends React.Component {
         this.handleInput =this.handleInput.bind(this)
     }
     async componentDidMount() {
+        // this.callBackendApi()
+        // .then(res => this.setState({input: res.data}))
+        // .catch(err=> console.log(err))
         await searchImageBing('car')
         .then(data=>{
             
@@ -20,14 +24,24 @@ class TestPage extends React.Component {
             this.setState({image: <img alt='mini' src={data.value[2].thumbnailUrl + '&w=200&h=200'}/>})})
     }
     
+    // callBackendApi = async () => {
+    //     const response = await fetch('http://localhost:5000/message');
+    //     const data = await response.json();
+
+    //     if (response.status !== 200) {
+    //         throw Error(data.message)
+    //     }
+    //     return data
+    // }
+
     handleInput = (e) => {
         this.setState({input: e.target.value})
     }
     
     handleClick = async () => {
+        
         await searchImageBing(this.state.input)
         .then(data=>{
-            
             this.setState({image: <img alt='mini' src={data.value[1].thumbnailUrl + '&w=200'}/>})})
     }
     

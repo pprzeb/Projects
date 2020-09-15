@@ -39,11 +39,11 @@ class RepetitionPage extends React.Component {
             romanianInput: '',
             italianInput: '',
             spanishInput: '',
-            englishSentence: '',
-            frenchSentence: '',
-            romanianSentence: '',
-            italianSentence: '',
-            spanishSentence: '',
+            englishSentence: 'Type some sentence to memorize',
+            frenchSentence: 'Ecris une pharse pour mieux memoriser',
+            romanianSentence: 'scrie o propoziție pentru a memora mai bine',
+            italianSentence: 'scrivi una frase per memorizzare meglio',
+            spanishSentence: 'escribe una oración para memorizar mejor',
         }
 
         this.handlerInput = this.handlerInput.bind(this);

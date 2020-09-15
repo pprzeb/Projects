@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import { auth, createUserProfile } from '../../firebase/firebase.utils';
+import { auth, createUserProfile } from '../../utils/firebase.utils';
 
 import './sign-up.style.scss'
 

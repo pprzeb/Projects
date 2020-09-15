@@ -1,7 +1,11 @@
 import firebase from 'firebase/app';
 
+import 'dotenv/config'
+
 import 'firebase/auth';
 import 'firebase/firestore';
+
+
 
 const config = {
     apiKey: "AIzaSyCxJXkoCiaV8_k16uUqDqHBtAPQ-c33Gwo",

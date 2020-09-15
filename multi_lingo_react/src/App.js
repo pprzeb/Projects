@@ -5,7 +5,7 @@ import Header from './components/header/header.component';
 import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up';
 import HomePage from './pages/homePage/homePage';
 
-import { createUserProfile, auth, firestore } from '../src/firebase/firebase.utils';
+import { createUserProfile, auth, firestore } from '../src/utils/firebase.utils';
 
 import { connect } from 'react-redux';
 import { setCurrentUser, getUserWordsCollection } from './redux/user/user.actions';

@@ -2,8 +2,8 @@ const INITIAL_STATE = {
     checkedItems: new Map([
         ['english', [false, 'menu-item eng']],
         ['french', [false, 'menu-item fre']],
-        ['romanian', [true, 'menu-item rom active']],
-        ['italian', [true, 'menu-item ita active']],
+        ['romanian', [false, 'menu-item rom']],
+        ['italian', [false, 'menu-item ita']],
         ['spanish', [false, 'menu-item spa']],
       ])
 }

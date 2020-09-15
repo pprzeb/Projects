@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './wordsList.style.scss';
-import { deleteWordFromDB, firestore } from '../../firebase/firebase.utils';
+import { deleteWordFromDB, firestore } from '../../utils/firebase.utils';
 import CustomButton from '../../components/customButton/customButton.component'
 import {connect} from 'react-redux';
 import styled from 'styled-components';

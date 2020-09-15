@@ -6,7 +6,7 @@ import CustomInput from '../../components/customInput/customInput.component'
 import CustomButton from '../../components/customButton/customButton.component'
 import WordsList from '../../components/wordsList/wordsList.component'
 
-import {addWordsToDB, firestore} from '../../firebase/firebase.utils'
+import {addWordsToDB, firestore} from '../../utils/firebase.utils'
 import {connect} from 'react-redux';
 import {getUserWordsCollection} from '../../redux/user/user.actions'
 
